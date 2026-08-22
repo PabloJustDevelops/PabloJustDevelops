@@ -53,7 +53,8 @@ def fetch_repos_and_stars():
     data = graphql(query, {'login': USER_NAME})
     user = data['data']['user']
     repos = user['repositories']['totalCount']
-    stars = sum(node['stargazers']['totalCount'] for node in user['repositories']['nodes'])
+    # With fine-grained tokens some stargazers fields can be null; treat them as zero.
+    stars = sum((node.get('stargazers') or {}).get('totalCount') or 0 for node in user['repositories']['nodes'])
     return repos, stars
 
 
@@ -113,7 +114,11 @@ def svg_overwrite(filename, repo_data, star_data, follower_data, commit_data):
 if __name__ == '__main__':
     repos, stars = fetch_repos_and_stars()
     followers = fetch_followers()
-    commits = fetch_year_commits()
+    try:
+        commits = fetch_year_commits()
+    except Exception as error:
+        print(f'WARN: could not fetch yearly commits ({error}); keeping previous value')
+        commits = None
     for svg in ('dark_mode.svg', 'light_mode.svg'):
-        svg_overwrite(svg, repos, stars, followers, commits)
+        svg_overwrite(svg, repos, stars, followers, commits if commits is not None else 0)
     print(f'Updated: {repos} repos, {stars} stars, {followers} followers, {commits} commits (year)')

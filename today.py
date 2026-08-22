@@ -2,9 +2,10 @@
 Daily profile stats updater for PabloJustDevelops (adapted from Andrew6rant's approach).
 
 Fetches repository, star, follower and yearly contribution counts from the
-GitHub API and rewrites the numbers inside dark_mode.svg and light_mode.svg.
+GitHub REST API and rewrites the numbers inside dark_mode.svg and light_mode.svg.
 
-Standard-library only, so it runs anywhere without pip installs.
+Uses the REST API so it works with a fine-grained token that has
+Metadata: Read-only on the profile repository (public data).
 
 Run with:
     ACCESS_TOKEN=<token> USER_NAME=PabloJustDevelops python today.py
@@ -15,19 +16,58 @@ import os
 import urllib.request
 import urllib.error
 import xml.etree.ElementTree as ET
-from datetime import datetime, timedelta, timezone
 
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 USER_NAME = os.environ.get('USER_NAME', 'PabloJustDevelops')
-GRAPHQL_URL = 'https://api.github.com/graphql'
+API_URL = 'https://api.github.com'
 ET.register_namespace('', 'http://www.w3.org/2000/svg')
+
+
+def rest_get(path, params=''):
+    """GET a REST endpoint with the token and return parsed JSON."""
+    request = urllib.request.Request(
+        f'{API_URL}{path}?{params}' if params else f'{API_URL}{path}',
+        headers={'Authorization': 'token ' + ACCESS_TOKEN, 'Accept': 'application/vnd.github+json'},
+        method='GET',
+    )
+    try:
+        with urllib.request.urlopen(request) as response:
+            return json.loads(response.read().decode('utf-8'))
+    except urllib.error.HTTPError as error:
+        raise Exception(f'REST request failed ({error.code}) for {path}: {error.read().decode()[:400]}')
+
+
+def fetch_repos_and_stars():
+    """Public owned repos and their total stars (paginated)."""
+    repos = []
+    page = 1
+    while True:
+        batch = rest_get(
+            f'/users/{USER_NAME}/repos',
+            f'type=owner&per_page=100&page={page}',
+        )
+        if not batch:
+            break
+        repos.extend(batch)
+        if len(batch) < 100:
+            break
+        page += 1
+    total = len(repos)
+    stars = sum(repo.get('stargazers_count') or 0 for repo in repos)
+    return total, stars
+
+
+def fetch_followers():
+    """Total follower count."""
+    user = rest_get(f'/users/{USER_NAME}')
+    return user.get('followers') or 0
 
 
 def graphql(query, variables):
     """POST a GraphQL query and return the parsed JSON response."""
     body = json.dumps({'query': query, 'variables': variables}).encode('utf-8')
     request = urllib.request.Request(
-        GRAPHQL_URL,
+        'https://api.github.com/graphql',
         data=body,
         headers={'Authorization': 'token ' + ACCESS_TOKEN, 'Content-Type': 'application/json'},
         method='POST',
@@ -36,40 +76,12 @@ def graphql(query, variables):
         with urllib.request.urlopen(request) as response:
             return json.loads(response.read().decode('utf-8'))
     except urllib.error.HTTPError as error:
-        raise Exception(f'GraphQL request failed with {error.code}: {error.read().decode()[:500]}')
-
-
-def fetch_repos_and_stars():
-    """Total owned repos and stars across them."""
-    query = '''
-    query($login: String!) {
-        user(login: $login) {
-            repositories(ownerAffiliations: OWNER, first: 100) {
-                totalCount
-                nodes { stargazers { totalCount } }
-            }
-        }
-    }'''
-    data = graphql(query, {'login': USER_NAME})
-    user = data['data']['user']
-    repos = user['repositories']['totalCount']
-    # With fine-grained tokens some stargazers fields can be null; treat them as zero.
-    stars = sum((node.get('stargazers') or {}).get('totalCount') or 0 for node in user['repositories']['nodes'])
-    return repos, stars
-
-
-def fetch_followers():
-    """Total follower count."""
-    query = '''
-    query($login: String!) {
-        user(login: $login) { followers { totalCount } }
-    }'''
-    data = graphql(query, {'login': USER_NAME})
-    return data['data']['user']['followers']['totalCount']
+        raise Exception(f'GraphQL request failed ({error.code}): {error.read().decode()[:400]}')
 
 
 def fetch_year_commits():
-    """Contributions in the last 365 days."""
+    """Contributions in the last 365 days via the GraphQL contribution calendar."""
+    from datetime import datetime, timedelta, timezone
     since = (datetime.now(timezone.utc) - timedelta(days=365)).isoformat()
     query = '''
     query($login: String!, $from: DateTime!) {
@@ -118,7 +130,7 @@ if __name__ == '__main__':
         commits = fetch_year_commits()
     except Exception as error:
         print(f'WARN: could not fetch yearly commits ({error}); keeping previous value')
-        commits = None
+        commits = 0
     for svg in ('dark_mode.svg', 'light_mode.svg'):
-        svg_overwrite(svg, repos, stars, followers, commits if commits is not None else 0)
+        svg_overwrite(svg, repos, stars, followers, commits)
     print(f'Updated: {repos} repos, {stars} stars, {followers} followers, {commits} commits (year)')

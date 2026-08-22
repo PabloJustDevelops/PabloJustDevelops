@@ -26,6 +26,10 @@
 - I like working across the full product path: **architecture, backend services, interfaces, data, integrations, and documentation**.
 - I am especially interested in practical software that connects intelligent systems with real-world interaction: cameras, microphones, desktop environments, and developer workflows.
 - I also maintain Linux desktop configurations focused on a minimal, productive, and gaming-friendly experience.
+- I work across web, mobile, desktop, backend, testing, CI/CD, and self-hosted infrastructure, choosing tools pragmatically for each project.
+
+My projects range from public experiments and developer tooling to private product work. The stack below reflects technologies I have actually used across those projects.
+
 
 ## What I build
 
@@ -36,6 +40,8 @@
 | 🧩 Developer tooling | Command Code mods, local stack detection, skill management, and automation utilities |
 | 🖥️ Desktop & UI | Flet desktop interfaces, Flask web apps, Streamlit dashboards, and reusable UI flows |
 | ⚙️ Systems & automation | MQTT services, SQLite persistence, shell automation, Linux customization, and hardware-aware workflows |
+| 📱 Web & mobile products | Astro, Next.js, Angular, React, Expo/React Native, responsive interfaces, and Supabase-backed applications |
+| 🧪 Quality & delivery | Unit, integration, and end-to-end testing with Pytest, Jest, Vitest, Karma, Playwright, and GitHub Actions |
 
 ## Featured projects
 
@@ -83,6 +89,9 @@ Personal Hyprland configuration for CachyOS/Arch Linux, designed around a minima
 <p>
   <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
   <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
+  <img src="https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white" alt="Go" />
+  <img src="https://img.shields.io/badge/SQL-4479A1?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQL" />
   <img src="https://img.shields.io/badge/Shell-4EAA25?style=for-the-badge&logo=gnubash&logoColor=white" alt="Shell" />
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5" />
   <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3" />
@@ -97,6 +106,9 @@ Personal Hyprland configuration for CachyOS/Arch Linux, designed around a minima
   <img src="https://img.shields.io/badge/Tesseract_OCR-4B8B3B?style=for-the-badge" alt="Tesseract OCR" />
   <img src="https://img.shields.io/badge/Groq-F55036?style=for-the-badge" alt="Groq" />
   <img src="https://img.shields.io/badge/Google_Gemini-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white" alt="Google Gemini" />
+  <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch" />
+  <img src="https://img.shields.io/badge/Ultralytics-111F68?style=for-the-badge" alt="Ultralytics" />
+  <img src="https://img.shields.io/badge/Whisper-412991?style=for-the-badge" alt="OpenAI Whisper" />
   <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy" />
   <img src="https://img.shields.io/badge/pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="pandas" />
 </p>
@@ -104,10 +116,19 @@ Personal Hyprland configuration for CachyOS/Arch Linux, designed around a minima
 ### Frameworks, interfaces & storage
 
 <p>
+  <img src="https://img.shields.io/badge/Astro-BC52EE?style=for-the-badge&logo=astro&logoColor=white" alt="Astro" />
+  <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js" />
+  <img src="https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Angular" />
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
+  <img src="https://img.shields.io/badge/Expo-000020?style=for-the-badge&logo=expo&logoColor=white" alt="Expo" />
   <img src="https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white" alt="Flask" />
   <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit" />
   <img src="https://img.shields.io/badge/Flet-02569B?style=for-the-badge" alt="Flet" />
+  <img src="https://img.shields.io/badge/PySide6-41CD52?style=for-the-badge&logo=qt&logoColor=white" alt="PySide6" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS" />
   <img src="https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite" />
+  <img src="https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase" />
+  <img src="https://img.shields.io/badge/Drizzle_ORM-C5F74F?style=for-the-badge" alt="Drizzle ORM" />
   <img src="https://img.shields.io/badge/MQTT-660066?style=for-the-badge&logo=mqtt&logoColor=white" alt="MQTT" />
   <img src="https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=plotly&logoColor=white" alt="Plotly" />
   <img src="https://img.shields.io/badge/ReportLab-2F4F4F?style=for-the-badge" alt="ReportLab" />
@@ -121,6 +142,11 @@ Personal Hyprland configuration for CachyOS/Arch Linux, designed around a minima
   <img src="https://img.shields.io/badge/Hyprland-00AEEF?style=for-the-badge" alt="Hyprland" />
   <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git" />
   <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
+  <img src="https://img.shields.io/badge/Cloudflare-F38020?style=for-the-badge&logo=cloudflare&logoColor=white" alt="Cloudflare" />
+  <img src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white" alt="GitHub Actions" />
+  <img src="https://img.shields.io/badge/Playwright-2EAD33?style=for-the-badge&logo=playwright&logoColor=white" alt="Playwright" />
+  <img src="https://img.shields.io/badge/Nx-143055?style=for-the-badge&logo=nx&logoColor=white" alt="Nx" />
   <img src="https://img.shields.io/badge/NVIDIA-76B900?style=for-the-badge&logo=nvidia&logoColor=white" alt="NVIDIA" />
 </p>
 
@@ -128,7 +154,10 @@ Personal Hyprland configuration for CachyOS/Arch Linux, designed around a minima
 <summary>More tools used across my projects</summary>
 
 - **Desktop and automation:** PyAutoGUI, MSS, PyWinAuto, psutil, Pillow, `python-dotenv`, keyring, schedule
-- **Voice and interaction:** SpeechRecognition, PyAudio, sounddevice, pyttsx3, MediaPipe, pyzbar
+- **Voice and interaction:** SpeechRecognition, PyAudio, sounddevice, pyttsx3, Vosk, MediaPipe, pyzbar
+- **AI and vision:** PyTorch, Ultralytics, OpenAI Whisper, OpenCV, Tesseract OCR, Google Gemini, Groq
+- **Web and mobile:** React Native, Expo Router, Angular CLI, Nx, Vite, Supabase, Drizzle ORM, Zustand, GSAP, Lenis
+- **Testing and delivery:** Pytest, Jest, Vitest, Karma, SuperTest, Playwright, ESLint, Prettier, Docker Compose, Cloudflare Pages/Workers, Resend
 - **Analysis and matching:** SciPy, TheFuzz, python-Levenshtein, Plotly, pandas
 - **Documentation and files:** PyPDF2, python-docx, ReportLab, OpenPyXL, Mermaid
 - **Developer workflow:** Command Code, `npx skills`, TypeScript mods, local-first heuristics, shell scripting

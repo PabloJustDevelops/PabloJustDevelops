@@ -31,13 +31,13 @@
 <tspan x="350" y="50" class="cc">. </tspan><tspan class="key">OS</tspan>:<tspan class="cc"> ........................... </tspan><tspan class="value">Windows, Linux, Arch, CachyOS</tspan>
 <tspan x="350" y="110" class="cc">. </tspan><tspan class="key">IDE</tspan>:<tspan class="cc"> ........................... </tspan><tspan class="value">VS Code, Cursor, Command Code</tspan>
 <tspan x="350" y="130" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Programming</tspan>:<tspan class="cc"> ..... </tspan><tspan class="value">Python, TypeScript, JavaScript, Go</tspan>
-<tspan x="350" y="150" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Data</tspan>:<tspan class="cc"> ............. </tspan><tspan class="value">SQL, SQLite, YAML, JSON</tspan>
+<tspan x="350" y="150" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Data</tspan>:<tspan class="cc"> ............. </tspan><tspan class="value">SQL, YAML, JSON, XML, DTD, XSD</tspan>
 <tspan x="350" y="170" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Real</tspan>:<tspan class="cc"> ............ </tspan><tspan class="value">Spanish, English</tspan>
 <tspan x="350" y="190" class="cc">. </tspan><tspan class="key">Focus</tspan>.<tspan class="key">AI</tspan>:<tspan class="cc"> ................... </tspan><tspan class="value">LLMs, voice, OCR, vision</tspan>
 <tspan x="350" y="210" class="cc">. </tspan><tspan class="key">Focus</tspan>.<tspan class="key">Systems</tspan>:<tspan class="cc"> ............ </tspan><tspan class="value">automation, MQTT, self-hosting</tspan>
 <tspan x="350" y="250" class="key">Technologies</tspan>:<tspan class="cc"> ................... </tspan><tspan class="value">Astro, React, Next.js, Angular</tspan>
 <tspan x="350" y="270" class="cc">. </tspan><tspan class="value">OpenCV, PyTorch, Ultralytics, Whisper, MediaPipe</tspan>
-<tspan x="350" y="290" class="cc">. </tspan><tspan class="value">Supabase, Docker, Cloudflare, Spring Boot, Java</tspan>
+<tspan x="350" y="290" class="cc">. </tspan><tspan class="value">Supabase, Docker, Cloudflare, Spring Boot, Java, Android</tspan>
 <tspan x="350" y="310" class="cc">. </tspan><tspan class="value">Playwright, Pytest, Jest, Vitest, GitHub Actions</tspan>
 <tspan x="350" y="330" class="cc">. </tspan>
 <tspan x="350" y="350">- Skills</tspan> -——————————————————————————————————————————————-—-

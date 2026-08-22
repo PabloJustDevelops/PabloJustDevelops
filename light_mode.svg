@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="985px" height="690px" font-size="16px">
+<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="1120px" height="690px" font-size="14px">
 <style>
 @font-face { src: local('Consolas'), local('Consolas Bold'); font-family: 'ConsolasFallback'; font-display: swap; -webkit-size-adjust: 109%; size-adjust: 109%; }
 .key {fill: #953800;}.value {fill: #0a3069;}.cc {fill: #c2cfde;} text, tspan {white-space: pre;}
 </style>
-<rect width="985px" height="690px" fill="#f6f8fa" rx="15"/>
+<rect width="1120px" height="690px" fill="#f6f8fa" rx="15"/>
 <text x="15" y="30" fill="#24292f" class="ascii" xml:space="preserve">
 <tspan x="15" y="30">.++@+   .   ---+*+==+*#+:-::.       ##</tspan>
 <tspan x="15" y="50">.-=+-      .::=@@+.:-#@*:::..       .:</tspan>
@@ -36,38 +36,38 @@
 <tspan x="15" y="600">       PabloJustDevelops</tspan>
 <tspan x="15" y="620" fill="#57606a">   real avatar parsed to ASCII</tspan>
 </text>
-<text x="390" y="30" fill="#24292f">
-<tspan x="390" y="30">pablo@github</tspan> -———————————————————————————————————————————-—-
-<tspan x="390" y="50" class="cc">. </tspan><tspan class="key">OS</tspan>:<tspan class="cc"> ................................. </tspan><tspan class="value">Windows, Linux, Arch, CachyOS</tspan>
-<tspan x="390" y="70" class="cc">. </tspan><tspan class="key">Host</tspan>:<tspan class="cc"> ................................ </tspan><tspan class="value">PabloJustDevelops</tspan>
-<tspan x="390" y="90" class="cc">. </tspan><tspan class="key">Kernel</tspan>:<tspan class="cc"> ............................ </tspan><tspan class="value">Full-stack software developer</tspan>
-<tspan x="390" y="110" class="cc">. </tspan><tspan class="key">IDE</tspan>:<tspan class="cc"> ................................ </tspan><tspan class="value">VS Code, Cursor, Command Code</tspan>
-<tspan x="390" y="130" class="cc">. </tspan><tspan class="key">Status</tspan>:<tspan class="cc"> ............................. </tspan><tspan class="value">building useful software</tspan>
-<tspan x="390" y="150" class="cc">. </tspan>
-<tspan x="390" y="170" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Programming</tspan>:<tspan class="cc"> .... </tspan><tspan class="value">Python, TypeScript, JavaScript, Go</tspan>
-<tspan x="390" y="190" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Data</tspan>:<tspan class="cc"> .................... </tspan><tspan class="value">SQL, SQLite, YAML, JSON</tspan>
-<tspan x="390" y="210" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Web</tspan>:<tspan class="cc"> .................... </tspan><tspan class="value">HTML, CSS, Markdown</tspan>
-<tspan x="390" y="230" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Real</tspan>:<tspan class="cc"> ....................... </tspan><tspan class="value">Spanish, English</tspan>
-<tspan x="390" y="250" class="cc">. </tspan>
-<tspan x="390" y="270" class="cc">. </tspan><tspan class="key">Focus</tspan>.<tspan class="key">AI</tspan>:<tspan class="cc"> ....................... </tspan><tspan class="value">LLMs, voice, OCR, vision</tspan>
-<tspan x="390" y="290" class="cc">. </tspan><tspan class="key">Focus</tspan>.<tspan class="key">Systems</tspan>:<tspan class="cc"> ................ </tspan><tspan class="value">automation, MQTT, self-hosting</tspan>
-<tspan x="390" y="310" class="cc">. </tspan><tspan class="key">Focus</tspan>.<tspan class="key">Interfaces</tspan>:<tspan class="cc"> ............... </tspan><tspan class="value">web, mobile, desktop UI</tspan>
-<tspan x="390" y="330" class="cc">. </tspan>
-<tspan x="390" y="350" class="key">Technologies</tspan>:<tspan class="cc"> ..................... </tspan><tspan class="value">Astro, React, Next.js, Angular</tspan>
-<tspan x="390" y="370" class="cc">. </tspan><tspan class="value">Expo, React Native, Flask, Flet, PySide6</tspan>
-<tspan x="390" y="390" class="cc">. </tspan><tspan class="value">OpenCV, PyTorch, Ultralytics, Whisper, MediaPipe</tspan>
-<tspan x="390" y="410" class="cc">. </tspan><tspan class="value">Supabase, Drizzle ORM, Docker, Cloudflare, Nx</tspan>
-<tspan x="390" y="430" class="cc">. </tspan><tspan class="value">Playwright, Pytest, Jest, Vitest, GitHub Actions</tspan>
-<tspan x="390" y="450" class="cc">. </tspan>
-<tspan x="390" y="470">- Projects</tspan> -——————————————————————————————————————————————-—-
-<tspan x="390" y="490" class="cc">. </tspan><tspan class="key">Developer tooling</tspan>:<tspan class="cc"> ............... </tspan><tspan class="value">Command Code mods, skills</tspan>
-<tspan x="390" y="510" class="cc">. </tspan><tspan class="key">AI applications</tspan>:<tspan class="cc"> .................. </tspan><tspan class="value">Automata Core, multimodal tools</tspan>
-<tspan x="390" y="530" class="cc">. </tspan><tspan class="key">Computer vision</tspan>:<tspan class="cc"> ................ </tspan><tspan class="value">Brandio detection systems</tspan>
-<tspan x="390" y="550" class="cc">. </tspan><tspan class="key">Web products</tspan>:<tspan class="cc"> .................... </tspan><tspan class="value">portfolios, landing pages, apps</tspan>
-<tspan x="390" y="570" class="cc">. </tspan><tspan class="key">Infrastructure</tspan>:<tspan class="cc"> .................. </tspan><tspan class="value">Linux, Docker, self-hosting</tspan>
-<tspan x="390" y="610">- Contact</tspan> -——————————————————————————————————————————————-—-
-<tspan x="390" y="630" class="cc">. </tspan><tspan class="key">GitHub</tspan>:<tspan class="cc"> .................................. </tspan><tspan class="value">PabloJustDevelops</tspan>
-<tspan x="390" y="650" class="cc">. </tspan><tspan class="key">Profile</tspan>:<tspan class="cc"> ................................. </tspan><tspan class="value">github.com/PabloJustDevelops</tspan>
-<tspan x="390" y="670" class="cc">. </tspan><tspan class="key">Repos</tspan>:<tspan class="cc"> .............. </tspan><tspan class="value">6 public · 13 private projects</tspan>
+<text x="365" y="30" fill="#24292f">
+<tspan x="365" y="30">pablo@github</tspan> -———————————————————————————————————————————-—-
+<tspan x="365" y="50" class="cc">. </tspan><tspan class="key">OS</tspan>:<tspan class="cc"> ................................. </tspan><tspan class="value">Windows, Linux, Arch, CachyOS</tspan>
+<tspan x="365" y="70" class="cc">. </tspan><tspan class="key">Host</tspan>:<tspan class="cc"> ................................ </tspan><tspan class="value">PabloJustDevelops</tspan>
+<tspan x="365" y="90" class="cc">. </tspan><tspan class="key">Kernel</tspan>:<tspan class="cc"> ............................ </tspan><tspan class="value">Full-stack software developer</tspan>
+<tspan x="365" y="110" class="cc">. </tspan><tspan class="key">IDE</tspan>:<tspan class="cc"> ................................ </tspan><tspan class="value">VS Code, Cursor, Command Code</tspan>
+<tspan x="365" y="130" class="cc">. </tspan><tspan class="key">Status</tspan>:<tspan class="cc"> ............................. </tspan><tspan class="value">building useful software</tspan>
+<tspan x="365" y="150" class="cc">. </tspan>
+<tspan x="365" y="170" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Programming</tspan>:<tspan class="cc"> .... </tspan><tspan class="value">Python, TypeScript, JavaScript, Go</tspan>
+<tspan x="365" y="190" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Data</tspan>:<tspan class="cc"> .................... </tspan><tspan class="value">SQL, SQLite, YAML, JSON</tspan>
+<tspan x="365" y="210" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Web</tspan>:<tspan class="cc"> .................... </tspan><tspan class="value">HTML, CSS, Markdown</tspan>
+<tspan x="365" y="230" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Real</tspan>:<tspan class="cc"> ....................... </tspan><tspan class="value">Spanish, English</tspan>
+<tspan x="365" y="250" class="cc">. </tspan>
+<tspan x="365" y="270" class="cc">. </tspan><tspan class="key">Focus</tspan>.<tspan class="key">AI</tspan>:<tspan class="cc"> ....................... </tspan><tspan class="value">LLMs, voice, OCR, vision</tspan>
+<tspan x="365" y="290" class="cc">. </tspan><tspan class="key">Focus</tspan>.<tspan class="key">Systems</tspan>:<tspan class="cc"> ................ </tspan><tspan class="value">automation, MQTT, self-hosting</tspan>
+<tspan x="365" y="310" class="cc">. </tspan><tspan class="key">Focus</tspan>.<tspan class="key">Interfaces</tspan>:<tspan class="cc"> ............... </tspan><tspan class="value">web, mobile, desktop UI</tspan>
+<tspan x="365" y="330" class="cc">. </tspan>
+<tspan x="365" y="350" class="key">Technologies</tspan>:<tspan class="cc"> ..................... </tspan><tspan class="value">Astro, React, Next.js, Angular</tspan>
+<tspan x="365" y="370" class="cc">. </tspan><tspan class="value">Expo, React Native, Flask, Flet, PySide6</tspan>
+<tspan x="365" y="390" class="cc">. </tspan><tspan class="value">OpenCV, PyTorch, Ultralytics, Whisper, MediaPipe</tspan>
+<tspan x="365" y="410" class="cc">. </tspan><tspan class="value">Supabase, Drizzle ORM, Docker, Cloudflare, Nx</tspan>
+<tspan x="365" y="430" class="cc">. </tspan><tspan class="value">Playwright, Pytest, Jest, Vitest, GitHub Actions</tspan>
+<tspan x="365" y="450" class="cc">. </tspan>
+<tspan x="365" y="470">- Projects</tspan> -——————————————————————————————————————————————-—-
+<tspan x="365" y="490" class="cc">. </tspan><tspan class="key">Developer tooling</tspan>:<tspan class="cc"> ............... </tspan><tspan class="value">Command Code mods, skills</tspan>
+<tspan x="365" y="510" class="cc">. </tspan><tspan class="key">AI applications</tspan>:<tspan class="cc"> .................. </tspan><tspan class="value">Automata Core, multimodal tools</tspan>
+<tspan x="365" y="530" class="cc">. </tspan><tspan class="key">Computer vision</tspan>:<tspan class="cc"> ................ </tspan><tspan class="value">Brandio detection systems</tspan>
+<tspan x="365" y="550" class="cc">. </tspan><tspan class="key">Web products</tspan>:<tspan class="cc"> .................... </tspan><tspan class="value">portfolios, landing pages, apps</tspan>
+<tspan x="365" y="570" class="cc">. </tspan><tspan class="key">Infrastructure</tspan>:<tspan class="cc"> .................. </tspan><tspan class="value">Linux, Docker, self-hosting</tspan>
+<tspan x="365" y="610">- Contact</tspan> -——————————————————————————————————————————————-—-
+<tspan x="365" y="630" class="cc">. </tspan><tspan class="key">GitHub</tspan>:<tspan class="cc"> .................................. </tspan><tspan class="value">PabloJustDevelops</tspan>
+<tspan x="365" y="650" class="cc">. </tspan><tspan class="key">Profile</tspan>:<tspan class="cc"> ................................. </tspan><tspan class="value">github.com/PabloJustDevelops</tspan>
+<tspan x="365" y="670" class="cc">. </tspan><tspan class="key">Repos</tspan>:<tspan class="cc"> .............. </tspan><tspan class="value">6 public · 13 private projects</tspan>
 </text>
 </svg>

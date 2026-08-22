@@ -34,7 +34,7 @@
 <tspan x="350" y="110" class="cc">. </tspan><tspan class="key">Harness</tspan>:<tspan class="cc"> ...................... </tspan><tspan class="value">CommandCode, Hermes</tspan>
 <tspan x="350" y="130" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Programming</tspan>:<tspan class="cc"> ..... </tspan><tspan class="value">Python, TypeScript, JavaScript, Go, Java</tspan>
 <tspan x="350" y="150" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Computer</tspan>:<tspan class="cc"> ......... </tspan><tspan class="value">HTML, CSS, JSON, XML, DTD, XSD, YAML</tspan>
-<tspan x="350" y="170" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Data</tspan>:<tspan class="cc"> ............. </tspan><tspan class="value">SQL, PostgreSQL, MySQL, OracleSQL, SQLite, Firebase</tspan>
+<tspan x="350" y="170" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Data</tspan>:<tspan class="cc"> .............. </tspan><tspan class="value">PostgreSQL, MySQL, OracleSQL, SQLite, Firebase</tspan>
 <tspan x="350" y="190" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Real</tspan>:<tspan class="cc"> ............ </tspan><tspan class="value">Spanish, English</tspan>
 <tspan x="350" y="210" class="cc">. </tspan>
 <tspan x="350" y="230" class="key">Technologies</tspan>:<tspan class="cc"> ................... </tspan><tspan class="value">Astro, React, Next.js, Angular</tspan>

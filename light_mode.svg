@@ -28,7 +28,7 @@
 </text>
 <text x="350" y="30" fill="#1f2328">
 <tspan x="350" y="30">pablo@github</tspan> -———————————————————————————————————————————-—-
-<tspan x="350" y="50" class="cc">. </tspan><tspan class="key">OS</tspan>:<tspan class="cc"> ........................... </tspan><tspan class="value">Windows, Linux, Arch, CachyOS</tspan>
+<tspan x="350" y="50" class="cc">. </tspan><tspan class="key">OS</tspan>:<tspan class="cc"> ........................... </tspan><tspan class="value">Windows, Linux</tspan>
 <tspan x="350" y="110" class="cc">. </tspan><tspan class="key">IDE</tspan>:<tspan class="cc"> ........................... </tspan><tspan class="value">VS Code, Cursor, Command Code</tspan>
 <tspan x="350" y="130" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Programming</tspan>:<tspan class="cc"> ..... </tspan><tspan class="value">Python, TypeScript, JavaScript, Go</tspan>
 <tspan x="350" y="150" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Data</tspan>:<tspan class="cc"> ............. </tspan><tspan class="value">SQL, YAML, JSON, XML, DTD, XSD</tspan>

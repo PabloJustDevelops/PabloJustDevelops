@@ -2,7 +2,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="1120px" height="690px" font-size="14px">
 <style>
 @font-face { src: local('Consolas'), local('Consolas Bold'); font-family: 'ConsolasFallback'; font-display: swap; -webkit-size-adjust: 109%; size-adjust: 109%; }
-.key {fill: #8250df;}.value {fill: #0a3069;}.cc {fill: #c2cfde;} text, tspan {white-space: pre;}
+.key {fill: #8250df;}.value {fill: #6d28d9;}.cc {fill: #9ca3af;} text, tspan {white-space: pre;}
 </style>
 <rect width="1120px" height="690px" fill="#f6f8fa" rx="15"/>
 <text x="15" y="30" fill="#24292f" class="ascii" xml:space="preserve">

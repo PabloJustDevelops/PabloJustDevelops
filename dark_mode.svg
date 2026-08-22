@@ -43,11 +43,11 @@
 <tspan x="350" y="290" class="cc">. </tspan><tspan class="value">Supabase, Docker, Cloudflare, Spring Boot, Java</tspan>
 <tspan x="350" y="310" class="cc">. </tspan><tspan class="value">Playwright, Pytest, Jest, Vitest, GitHub Actions</tspan>
 <tspan x="350" y="330" class="cc">. </tspan>
-<tspan x="350" y="350">- Projects</tspan> -——————————————————————————————————————————————-—-
-<tspan x="350" y="370" class="cc">. </tspan><tspan class="key">Developer tooling</tspan>:<tspan class="cc"> ............. </tspan><tspan class="value">Command Code mods, skills</tspan>
-<tspan x="350" y="390" class="cc">. </tspan><tspan class="key">AI applications</tspan>:<tspan class="cc"> .............. </tspan><tspan class="value">Automata Core, multimodal tools</tspan>
-<tspan x="350" y="410" class="cc">. </tspan><tspan class="key">Computer vision</tspan>:<tspan class="cc"> ............ </tspan><tspan class="value">Brandio detection systems</tspan>
-<tspan x="350" y="430" class="cc">. </tspan><tspan class="key">Web products</tspan>:<tspan class="cc"> ................ </tspan><tspan class="value">portfolios, landing pages, apps</tspan>
+<tspan x="350" y="350">- Skills</tspan> -——————————————————————————————————————————————-—-
+<tspan x="350" y="370" class="cc">. </tspan><tspan class="key">AI &amp; Vision</tspan>:<tspan class="cc"> ............. </tspan><tspan class="value">multimodal apps, real-time detection, NLP</tspan>
+<tspan x="350" y="390" class="cc">. </tspan><tspan class="key">Full-stack</tspan>:<tspan class="cc"> .............. </tspan><tspan class="value">web, desktop, mobile, APIs, real-time</tspan>
+<tspan x="350" y="410" class="cc">. </tspan><tspan class="key">DevOps</tspan>:<tspan class="cc"> ............ </tspan><tspan class="value">Docker, CI/CD, self-hosting, automation</tspan>
+<tspan x="350" y="430" class="cc">. </tspan><tspan class="key">Cybersecurity</tspan>:<tspan class="cc"> ................ </tspan><tspan class="value">coming soon</tspan>
 <tspan x="350" y="450">- GitHub Stats</tspan> -—————————————————————————————————————————-—-
 <tspan x="350" y="470" class="cc">. </tspan><tspan class="key">Repos</tspan>:<tspan class="cc" id="repo_data_dots"> ..... </tspan><tspan class="value" id="repo_data">6</tspan> {<tspan class="key">Contributed</tspan>: <tspan class="value" id="contrib_data">6</tspan>}
 <tspan x="350" y="490" class="cc">. </tspan><tspan class="key">Commits</tspan>:<tspan class="cc" id="commit_data_dots"> ...... </tspan><tspan class="value" id="commit_data">1231</tspan>

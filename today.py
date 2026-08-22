@@ -1,11 +1,8 @@
 """
 Daily profile stats updater for PabloJustDevelops (adapted from Andrew6rant's approach).
 
-Fetches repository, star, follower and yearly contribution counts from the
-GitHub REST API and rewrites the numbers inside dark_mode.svg and light_mode.svg.
-
-Uses the REST API so it works with a fine-grained token that has
-Metadata: Read-only on the profile repository (public data).
+Fetches repository, LOC, commit and contribution counts from the GitHub
+GraphQL API and rewrites the numbers inside dark_mode.svg and light_mode.svg.
 
 Run with:
     ACCESS_TOKEN=<token> USER_NAME=PabloJustDevelops python today.py
@@ -19,55 +16,15 @@ import xml.etree.ElementTree as ET
 
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 USER_NAME = os.environ.get('USER_NAME', 'PabloJustDevelops')
-API_URL = 'https://api.github.com'
+GRAPHQL_URL = 'https://api.github.com/graphql'
 ET.register_namespace('', 'http://www.w3.org/2000/svg')
-
-
-def rest_get(path, params=''):
-    """GET a REST endpoint with the token and return parsed JSON."""
-    request = urllib.request.Request(
-        f'{API_URL}{path}?{params}' if params else f'{API_URL}{path}',
-        headers={'Authorization': 'token ' + ACCESS_TOKEN, 'Accept': 'application/vnd.github+json'},
-        method='GET',
-    )
-    try:
-        with urllib.request.urlopen(request) as response:
-            return json.loads(response.read().decode('utf-8'))
-    except urllib.error.HTTPError as error:
-        raise Exception(f'REST request failed ({error.code}) for {path}: {error.read().decode()[:400]}')
-
-
-def fetch_repos_and_stars():
-    """Public owned repos and their total stars (paginated)."""
-    repos = []
-    page = 1
-    while True:
-        batch = rest_get(
-            f'/users/{USER_NAME}/repos',
-            f'type=owner&per_page=100&page={page}',
-        )
-        if not batch:
-            break
-        repos.extend(batch)
-        if len(batch) < 100:
-            break
-        page += 1
-    total = len(repos)
-    stars = sum(repo.get('stargazers_count') or 0 for repo in repos)
-    return total, stars
-
-
-def fetch_followers():
-    """Total follower count."""
-    user = rest_get(f'/users/{USER_NAME}')
-    return user.get('followers') or 0
 
 
 def graphql(query, variables):
     """POST a GraphQL query and return the parsed JSON response."""
     body = json.dumps({'query': query, 'variables': variables}).encode('utf-8')
     request = urllib.request.Request(
-        'https://api.github.com/graphql',
+        GRAPHQL_URL,
         data=body,
         headers={'Authorization': 'token ' + ACCESS_TOKEN, 'Content-Type': 'application/json'},
         method='POST',
@@ -79,8 +36,156 @@ def graphql(query, variables):
         raise Exception(f'GraphQL request failed ({error.code}): {error.read().decode()[:400]}')
 
 
+def rest_get(path):
+    """GET a REST endpoint and return parsed JSON."""
+    request = urllib.request.Request(
+        f'https://api.github.com{path}',
+        headers={'Authorization': 'token ' + ACCESS_TOKEN, 'Accept': 'application/vnd.github+json'},
+        method='GET',
+    )
+    try:
+        with urllib.request.urlopen(request) as response:
+            return json.loads(response.read().decode('utf-8'))
+    except urllib.error.HTTPError as error:
+        raise Exception(f'REST request failed ({error.code}) for {path}: {error.read().decode()[:400]}')
+
+
+def get_owner_id():
+    """Get the account ID for GraphQL user queries."""
+    query = '''
+    query($login: String!) {
+        user(login: $login) { id }
+    }'''
+    data = graphql(query, {'login': USER_NAME})
+    return data['data']['user']['id']
+
+
+def get_all_repos(owner_id):
+    """Return all repositories the user owns or has contributed to."""
+    query = '''
+    query($owner_id: ID!) {
+        user(login: $owner_id) {
+            repositories(first: 100, ownerAffiliations: OWNER) {
+                nodes {
+                    nameWithOwner
+                    defaultBranchRef { target { ... on Commit { history { totalCount } } } }
+                }
+            }
+        }
+    }'''
+    # GraphQL doesn't accept login as an ID directly; use login-based query
+    query2 = '''
+    query($login: String!) {
+        user(login: $login) {
+            repositories(first: 100, ownerAffiliations: OWNER) {
+                nodes {
+                    nameWithOwner
+                    defaultBranchRef {
+                        target {
+                            ... on Commit {
+                                history { totalCount }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }'''
+    data = graphql(query2, {'login': USER_NAME})
+    return data['data']['user']['repositories']['nodes']
+
+
+def fetch_commits_for_repo(repo_name, total_commits):
+    """Count additions and deletions for a single repo across all commits."""
+    owner, name = repo_name.split('/')
+    additions = 0
+    deletions = 0
+    my_commits = 0
+    cursor = None
+    while True:
+        variables = {'owner': owner, 'name': name, 'cursor': cursor}
+        query = '''
+        query($owner: String!, $name: String!, $cursor: String) {
+            repository(name: $name, owner: $owner) {
+                defaultBranchRef {
+                    target {
+                        ... on Commit {
+                            history(first: 100, after: $cursor) {
+                                edges {
+                                    node {
+                                        author { user { id } }
+                                        additions
+                                        deletions
+                                    }
+                                }
+                                pageInfo { endCursor hasNextPage }
+                            }
+                        }
+                    }
+                }
+            }
+        }'''
+        data = graphql(query, variables)
+        ref = data.get('data', {}).get('repository', {}).get('defaultBranchRef')
+        if not ref or not ref.get('target', {}).get('history'):
+            break
+        history = ref['target']['history']
+        for edge in history.get('edges', []):
+            node = edge.get('node', {})
+            author = (node.get('author') or {}).get('user') or {}
+            additions += node.get('additions') or 0
+            deletions += node.get('deletions') or 0
+            if author.get('id') == OWNER_ID:
+                my_commits += 1
+        if not history.get('pageInfo', {}).get('hasNextPage'):
+            break
+        cursor = history['pageInfo']['endCursor']
+    return additions, deletions, my_commits
+
+
+def fetch_repos_and_loc():
+    """Total repos, LOC and per-repo commit stats."""
+    repos = get_all_repos(OWNER_ID)
+    total_repos = len(repos)
+    total_additions = 0
+    total_deletions = 0
+    total_commits = 0
+    for repo in repos:
+        name = repo.get('nameWithOwner', '')
+        if not name:
+            continue
+        history_count = 0
+        ref = repo.get('defaultBranchRef')
+        if ref and ref.get('target', {}).get('history'):
+            history_count = ref['target']['history'].get('totalCount') or 0
+        if history_count == 0:
+            continue
+        add, dele, commits = fetch_commits_for_repo(name, history_count)
+        total_additions += add
+        total_deletions += dele
+        total_commits += commits
+    loc = total_additions - total_deletions
+    return total_repos, total_commits, total_additions, total_deletions, loc
+
+
+def fetch_contributed_repos():
+    """Count repos the user has contributed to (owned + collaborator + org)."""
+    query = '''
+    query($login: String!) {
+        user(login: $login) {
+            repositories(first: 100, ownerAffiliations: OWNER) { totalCount }
+            repositoriesContributedTo(first: 100) { totalCount }
+        }
+    }'''
+    data = graphql(query, {'login': USER_NAME})
+    user = data['data']['user']
+    owned = user.get('repositories', {}).get('totalCount') or 0
+    contributed = user.get('repositoriesContributedTo', {}).get('totalCount') or 0
+    return owned, contributed
+
+
 def fetch_year_commits():
-    """Contributions in the last 365 days via the GraphQL contribution calendar."""
+    """Contributions in the last 365 days via the contribution calendar."""
     from datetime import datetime, timedelta, timezone
     since = (datetime.now(timezone.utc) - timedelta(days=365)).isoformat()
     query = '''
@@ -112,25 +217,26 @@ def justify_format(root, element_id, new_text, length=0):
         dots.text = dot_string
 
 
-def svg_overwrite(filename, repo_data, star_data, follower_data, commit_data):
+def svg_overwrite(filename, repo_data, contrib_data, commit_data, loc_data, loc_add, loc_del):
     """Rewrite the stats placeholders inside one SVG file."""
     tree = ET.parse(filename)
     root = tree.getroot()
     justify_format(root, 'repo_data', repo_data, 6)
-    justify_format(root, 'star_data', star_data, 7)
-    justify_format(root, 'follower_data', follower_data, 4)
-    justify_format(root, 'commit_data', commit_data, 8)
+    justify_format(root, 'contrib_data', contrib_data)
+    justify_format(root, 'commit_data', commit_data, 10)
+    justify_format(root, 'loc_data', loc_data, 10)
+    justify_format(root, 'loc_add', loc_add, 10)
+    justify_format(root, 'loc_del', loc_del, 10)
     tree.write(filename, encoding='utf-8', xml_declaration=True)
 
 
 if __name__ == '__main__':
-    repos, stars = fetch_repos_and_stars()
-    followers = fetch_followers()
-    try:
-        commits = fetch_year_commits()
-    except Exception as error:
-        print(f'WARN: could not fetch yearly commits ({error}); keeping previous value')
-        commits = 0
+    OWNER_ID = get_owner_id()
+    repos, commits, add, dele, loc = fetch_repos_and_loc()
+    owned, contributed = fetch_contributed_repos()
+    year_commits = fetch_year_commits()
+
     for svg in ('dark_mode.svg', 'light_mode.svg'):
-        svg_overwrite(svg, repos, stars, followers, commits)
-    print(f'Updated: {repos} repos, {stars} stars, {followers} followers, {commits} commits (year)')
+        svg_overwrite(svg, owned, contributed, year_commits, loc, add, dele)
+
+    print(f'Updated: {owned} repos, {contributed} contributed, {year_commits} year commits, {loc:,} LOC ({add:,}++ / {dele:,}--)')

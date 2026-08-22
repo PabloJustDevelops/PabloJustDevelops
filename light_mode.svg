@@ -1,10 +1,10 @@
-<?xml version='1.0' encoding='utf-8'?>
-<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="1120px" height="770px" font-size="14px">
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="1120px" height="790px" font-size="14px">
 <style>
 @font-face { src: local('Consolas'), local('Consolas Bold'); font-family: 'ConsolasFallback'; font-display: swap; -webkit-size-adjust: 109%; size-adjust: 109%; }
 .key {fill: #8250df;}.value {fill: #6d28d9;}.cc {fill: #9ca3af;} text, tspan {white-space: pre;}
 </style>
-<rect width="1120px" height="770px" fill="#f6f8fa" rx="15" />
+<rect width="1120px" height="790px" fill="#f6f8fa" rx="15"/>
 <text x="15" y="30" fill="#24292f" class="ascii" xml:space="preserve">
 <tspan x="15" y="430">              %@@-                    </tspan>
 <tspan x="15" y="450">             =#%-:=@#*.               </tspan>
@@ -59,7 +59,8 @@
 <tspan x="365" y="630" class="cc">. </tspan><tspan class="key">GitHub</tspan>:<tspan class="cc"> .................................. </tspan><tspan class="value">PabloJustDevelops</tspan>
 <tspan x="365" y="650" class="cc">. </tspan><tspan class="key">Profile</tspan>:<tspan class="cc"> ................................. </tspan><tspan class="value">github.com/PabloJustDevelops</tspan>
 <tspan x="365" y="710">- GitHub Stats</tspan> -—————————————————————————————————————————-—-
-<tspan x="365" y="730" class="cc">. </tspan><tspan class="key">Repos</tspan>:<tspan class="cc" id="repo_data_dots"> ..... </tspan><tspan class="value" id="repo_data">6</tspan> | <tspan class="key">Stars</tspan>:<tspan class="cc" id="star_data_dots"> ...... </tspan><tspan class="value" id="star_data">1</tspan>
-<tspan x="365" y="750" class="cc">. </tspan><tspan class="key">Commits</tspan>:<tspan class="cc" id="commit_data_dots"> .... </tspan><tspan class="value" id="commit_data">1231</tspan> | <tspan class="key">Followers</tspan>:<tspan class="cc" id="follower_data_dots"> ... </tspan><tspan class="value" id="follower_data">1</tspan>
+<tspan x="365" y="730" class="cc">. </tspan><tspan class="key">Repos</tspan>:<tspan class="cc" id="repo_data_dots"> .... </tspan><tspan class="value" id="repo_data">0</tspan> {<tspan class="key">Contributed</tspan>: <tspan class="value" id="contrib_data">0</tspan>}
+<tspan x="365" y="750" class="cc">. </tspan><tspan class="key">Commits</tspan>:<tspan class="cc" id="commit_data_dots"> ................. </tspan><tspan class="value" id="commit_data">0</tspan>
+<tspan x="365" y="770" class="cc">. </tspan><tspan class="key">Lines of Code on GitHub</tspan>:<tspan class="cc" id="loc_data_dots"> </tspan><tspan class="value" id="loc_data">0</tspan> ( <tspan class="value" id="loc_add" style="fill:#3fb950">0</tspan><tspan class="value" style="fill:#3fb950">++</tspan>, <tspan id="loc_del_dots"></tspan><tspan class="value" id="loc_del" style="fill:#f85149">0</tspan><tspan class="value" style="fill:#f85149">--</tspan> )
 </text>
 </svg>

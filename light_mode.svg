@@ -26,28 +26,29 @@
 <tspan x="15" y="370">          -%**@@***#%+  @%#            </tspan>
 <tspan x="15" y="390">             #+.:*******+- -#@         </tspan>
 </text>
-<text x="350" y="30" fill="#1f2328">
+<text x="350" y="30" fill="#c9d1d9">
 <tspan x="350" y="30">pablo@github</tspan> -———————————————————————————————————————————-—-
 <tspan x="350" y="50" class="cc">. </tspan><tspan class="key">OS</tspan>:<tspan class="cc"> ........................... </tspan><tspan class="value">Windows, Linux</tspan>
-<tspan x="350" y="50" class="cc">. </tspan><tspan class="key">Uptime</tspan>:<tspan class="cc"> .................... </tspan><tspan class="value">since 2006-10-11</tspan>
-<tspan x="350" y="110" class="cc">. </tspan><tspan class="key">IDE</tspan>:<tspan class="cc"> ........................... </tspan><tspan class="value">VS Code, Cursor, Command Code</tspan>
-<tspan x="350" y="130" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Programming</tspan>:<tspan class="cc"> ..... </tspan><tspan class="value">Python, TypeScript, JavaScript, Go</tspan>
-<tspan x="350" y="150" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Data</tspan>:<tspan class="cc"> ............. </tspan><tspan class="value">SQL, YAML, JSON, XML, DTD, XSD</tspan>
-<tspan x="350" y="170" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Real</tspan>:<tspan class="cc"> ............ </tspan><tspan class="value">Spanish, English</tspan>
-<tspan x="350" y="190" class="cc">. </tspan><tspan class="key">Focus</tspan>.<tspan class="key">AI</tspan>:<tspan class="cc"> ................... </tspan><tspan class="value">LLMs, voice, OCR, vision</tspan>
-<tspan x="350" y="210" class="cc">. </tspan><tspan class="key">Focus</tspan>.<tspan class="key">Systems</tspan>:<tspan class="cc"> ............ </tspan><tspan class="value">automation, MQTT, self-hosting</tspan>
-<tspan x="350" y="250" class="key">Technologies</tspan>:<tspan class="cc"> ................... </tspan><tspan class="value">Astro, React, Next.js, Angular</tspan>
-<tspan x="350" y="270" class="cc">. </tspan><tspan class="value">OpenCV, PyTorch, Ultralytics, Whisper, MediaPipe</tspan>
-<tspan x="350" y="290" class="cc">. </tspan><tspan class="value">Supabase, Docker, Cloudflare, Spring Boot, Java, Android</tspan>
-<tspan x="350" y="310" class="cc">. </tspan><tspan class="value">Playwright, Pytest, Jest, Vitest, GitHub Actions</tspan>
-<tspan x="350" y="330" class="cc">. </tspan>
-- Contact</tspan> ————————————————————————————————————————————————
-<tspan x="350" y="450" class="cc">. </tspan><tspan class="key">Email</tspan>:<tspan class="cc"> ........................... </tspan><tspan class="value">pabloroga6@gmail.com</tspan>
-<tspan x="350" y="470" class="cc">. </tspan><tspan class="key">Discord</tspan>:<tspan class="cc"> .......................... </tspan><tspan class="value">pablo.java</tspan>
-
-<tspan x="350" y="450">- GitHub Stats</tspan> -—————————————————————————————————————————-—-
-<tspan x="350" y="470" class="cc">. </tspan><tspan class="key">Repos</tspan>:<tspan class="cc" id="repo_data_dots"> ..... </tspan><tspan class="value" id="repo_data">6</tspan> {<tspan class="key">Contributed</tspan>: <tspan class="value" id="contrib_data">6</tspan>}
-<tspan x="350" y="490" class="cc">. </tspan><tspan class="key">Commits</tspan>:<tspan class="cc" id="commit_data_dots"> ...... </tspan><tspan class="value" id="commit_data">1231</tspan>
-<tspan x="350" y="510" class="cc">. </tspan><tspan class="key">Lines of Code on GitHub</tspan>:<tspan class="cc" id="loc_data_dots"> ..... </tspan><tspan class="value" id="loc_data">15363</tspan> ( <tspan class="value" id="loc_add" style="fill:#1a7f37">18833</tspan><tspan class="value" style="fill:#1a7f37">++</tspan>, <tspan id="loc_del_dots"> </tspan><tspan class="value" id="loc_del" style="fill:#cf222e">3470</tspan><tspan class="value" style="fill:#cf222e">--</tspan> )
+<tspan x="350" y="70" class="cc">. </tspan><tspan class="key">Uptime</tspan>:<tspan class="cc"> .................... </tspan><tspan class="value">since 2006-10-11</tspan>
+<tspan x="350" y="90" class="cc">. </tspan><tspan class="key">IDE</tspan>:<tspan class="cc"> ........................... </tspan><tspan class="value">VS Code, Cursor, Command Code</tspan>
+<tspan x="350" y="110" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Programming</tspan>:<tspan class="cc"> ..... </tspan><tspan class="value">Python, TypeScript, JavaScript, Go</tspan>
+<tspan x="350" y="130" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Data</tspan>:<tspan class="cc"> ............. </tspan><tspan class="value">SQL, YAML, JSON, XML, DTD, XSD</tspan>
+<tspan x="350" y="150" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Real</tspan>:<tspan class="cc"> ............ </tspan><tspan class="value">Spanish, English</tspan>
+<tspan x="350" y="170" class="cc">. </tspan><tspan class="key">Focus</tspan>.<tspan class="key">AI</tspan>:<tspan class="cc"> ................... </tspan><tspan class="value">LLMs, voice, OCR, vision</tspan>
+<tspan x="350" y="190" class="cc">. </tspan><tspan class="key">Focus</tspan>.<tspan class="key">Systems</tspan>:<tspan class="cc"> ............ </tspan><tspan class="value">automation, MQTT, self-hosting</tspan>
+<tspan x="350" y="210" class="cc">. </tspan>
+<tspan x="350" y="230" class="key">Technologies</tspan>:<tspan class="cc"> ................... </tspan><tspan class="value">Astro, React, Next.js, Angular</tspan>
+<tspan x="350" y="250" class="cc">. </tspan><tspan class="value">OpenCV, PyTorch, Ultralytics, Whisper, MediaPipe</tspan>
+<tspan x="350" y="270" class="cc">. </tspan><tspan class="value">Supabase, Docker, Cloudflare, Spring Boot, Java, Android</tspan>
+<tspan x="350" y="290" class="cc">. </tspan><tspan class="value">Playwright, Pytest, Jest, Vitest, GitHub Actions</tspan>
+<tspan x="350" y="310" class="cc">. </tspan>
+<tspan x="350" y="330">- Contact</tspan> -——————————————————————————————————————————————-—-
+<tspan x="350" y="350" class="cc">. </tspan><tspan class="key">Email</tspan>:<tspan class="cc"> ........................... </tspan><tspan class="value">pabloroga6@gmail.com</tspan>
+<tspan x="350" y="370" class="cc">. </tspan><tspan class="key">Discord</tspan>:<tspan class="cc"> .......................... </tspan><tspan class="value">pablo.java</tspan>
+<tspan x="350" y="390" class="cc">. </tspan>
+<tspan x="350" y="410">- GitHub Stats</tspan> -—————————————————————————————————————————-—-
+<tspan x="350" y="430" class="cc">. </tspan><tspan class="key">Repos</tspan>:<tspan class="cc" id="repo_data_dots"> ..... </tspan><tspan class="value" id="repo_data">6</tspan> {<tspan class="key">Contributed</tspan>: <tspan class="value" id="contrib_data">6</tspan>}
+<tspan x="350" y="450" class="cc">. </tspan><tspan class="key">Commits</tspan>:<tspan class="cc" id="commit_data_dots"> ...... </tspan><tspan class="value" id="commit_data">1231</tspan>
+<tspan x="350" y="470" class="cc">. </tspan><tspan class="key">Lines of Code on GitHub</tspan>:<tspan class="cc" id="loc_data_dots"> ..... </tspan><tspan class="value" id="loc_data">15363</tspan> ( <tspan class="value" id="loc_add" style="fill:#3fb950">18833</tspan><tspan class="value" style="fill:#3fb950">++</tspan>, <tspan class="value" id="loc_del" style="fill:#f85149">3470</tspan><tspan class="value" style="fill:#f85149">--</tspan> )
 </text>
 </svg>

@@ -18,6 +18,24 @@ ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 USER_NAME = os.environ.get('USER_NAME', 'PabloJustDevelops')
 GRAPHQL_URL = 'https://api.github.com/graphql'
 ET.register_namespace('', 'http://www.w3.org/2000/svg')
+BIRTHDAY = (2006, 10, 11)  # (year, month, day)
+
+
+def calculate_age():
+    """Calculate age from BIRTHDAY to today and return a formatted string."""
+    from datetime import date
+    today = date.today()
+    years = today.year - BIRTHDAY[0] - ((today.month, today.day) < (BIRTHDAY[1], BIRTHDAY[2]))
+    months = today.month - BIRTHDAY[1]
+    if months < 0:
+        months += 12
+    days = today.day - BIRTHDAY[2]
+    if days < 0:
+        months -= 1
+        import calendar
+        prev_month = today.month - 1 if today.month > 1 else 12
+        days += calendar.monthrange(today.year, prev_month)[1]
+    return f'{years} years, {months} months, {days} days'
 
 
 def graphql(query, variables):
@@ -217,7 +235,7 @@ def justify_format(root, element_id, new_text, length=0):
         dots.text = dot_string
 
 
-def svg_overwrite(filename, repo_data, contrib_data, commit_data, loc_data, loc_add, loc_del):
+def svg_overwrite(filename, repo_data, contrib_data, commit_data, loc_data, loc_add, loc_del, age_data=None):
     """Rewrite the stats placeholders inside one SVG file."""
     tree = ET.parse(filename)
     root = tree.getroot()
@@ -227,6 +245,10 @@ def svg_overwrite(filename, repo_data, contrib_data, commit_data, loc_data, loc_
     justify_format(root, 'loc_data', loc_data, 10)
     justify_format(root, 'loc_add', loc_add, 10)
     justify_format(root, 'loc_del', loc_del, 10)
+    if age_data is not None:
+        element = root.find(".//*[@id='age_data']")
+        if element is not None:
+            element.text = age_data
     tree.write(filename, encoding='utf-8', xml_declaration=True)
 
 
@@ -236,7 +258,8 @@ if __name__ == '__main__':
     owned, contributed = fetch_contributed_repos()
     year_commits = fetch_year_commits()
 
+    age = calculate_age()
     for svg in ('dark_mode.svg', 'light_mode.svg'):
-        svg_overwrite(svg, owned, contributed, year_commits, loc, add, dele)
+        svg_overwrite(svg, owned, contributed, year_commits, loc, add, dele, age)
 
-    print(f'Updated: {owned} repos, {contributed} contributed, {year_commits} year commits, {loc:,} LOC ({add:,}++ / {dele:,}--)')
+    print(f'Updated: age={age}, {owned} repos, {contributed} contributed, {year_commits} year commits, {loc:,} LOC ({add:,}++ / {dele:,}--)')

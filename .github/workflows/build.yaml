@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      # GITHUB_TOKEN is available by default when contents: write is granted
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4

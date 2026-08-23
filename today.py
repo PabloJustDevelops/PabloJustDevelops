@@ -8,11 +8,14 @@ Run with:
     ACCESS_TOKEN=<token> USER_NAME=PabloJustDevelops python today.py
 """
 
+import calendar
 import json
 import os
+import re
 import urllib.request
 import urllib.error
 import xml.etree.ElementTree as ET
+from datetime import date, datetime, timedelta, timezone
 
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 USER_NAME = os.environ.get('USER_NAME', 'PabloJustDevelops')
@@ -23,7 +26,6 @@ BIRTHDAY = (2006, 10, 11)  # (year, month, day)
 
 def calculate_age():
     """Calculate age from BIRTHDAY to today and return a formatted string."""
-    from datetime import date
     today = date.today()
     years = today.year - BIRTHDAY[0] - ((today.month, today.day) < (BIRTHDAY[1], BIRTHDAY[2]))
     months = today.month - BIRTHDAY[1]
@@ -32,7 +34,6 @@ def calculate_age():
     days = today.day - BIRTHDAY[2]
     if days < 0:
         months -= 1
-        import calendar
         prev_month = today.month - 1 if today.month > 1 else 12
         days += calendar.monthrange(today.year, prev_month)[1]
     return f'{years} years, {months} months, {days} days'
@@ -54,18 +55,18 @@ def graphql(query, variables):
         raise Exception(f'GraphQL request failed ({error.code}): {error.read().decode()[:400]}')
 
 
-def rest_get(path):
-    """GET a REST endpoint and return parsed JSON."""
-    request = urllib.request.Request(
-        f'https://api.github.com{path}',
-        headers={'Authorization': 'token ' + ACCESS_TOKEN, 'Accept': 'application/vnd.github+json'},
-        method='GET',
-    )
-    try:
-        with urllib.request.urlopen(request) as response:
-            return json.loads(response.read().decode('utf-8'))
-    except urllib.error.HTTPError as error:
-        raise Exception(f'REST request failed ({error.code}) for {path}: {error.read().decode()[:400]}')
+def graphql_data(data, *path, default=None):
+    """Safely walk nested GraphQL responses; raise a clear error on failure."""
+    errors = data.get('errors')
+    if errors:
+        messages = '; '.join(e.get('message', str(e)) for e in errors)
+        raise Exception(f'GraphQL errors: {messages}')
+    node = data.get('data')
+    for key in path:
+        if node is None:
+            return default
+        node = node.get(key)
+    return node if node is not None else default
 
 
 def get_owner_id():
@@ -75,7 +76,10 @@ def get_owner_id():
         user(login: $login) { id }
     }'''
     data = graphql(query, {'login': USER_NAME})
-    return data['data']['user']['id']
+    user_id = graphql_data(data, 'user', 'id')
+    if not user_id:
+        raise Exception(f'Could not resolve user id for {USER_NAME!r}')
+    return user_id
 
 
 def get_all_repos():
@@ -104,7 +108,7 @@ def get_all_repos():
             }
         }'''
         data = graphql(query, {'login': USER_NAME, 'cursor': cursor})
-        repo_data = data['data']['user']['repositories']
+        repo_data = graphql_data(data, 'user', 'repositories', default={})
         for node in repo_data.get('nodes', []):
             if not node:
                 continue
@@ -138,7 +142,7 @@ def get_all_repos():
             }
         }'''
         data = graphql(query, {'login': USER_NAME, 'cursor': cursor})
-        contributed = data['data']['user']['repositoriesContributedTo']
+        contributed = graphql_data(data, 'user', 'repositoriesContributedTo', default={})
         for node in contributed.get('nodes', []):
             if not node:
                 continue
@@ -184,7 +188,7 @@ def fetch_commits_for_repo(repo_name, total_commits):
             }
         }'''
         data = graphql(query, variables)
-        ref = data.get('data', {}).get('repository', {}).get('defaultBranchRef')
+        ref = graphql_data(data, 'repository', 'defaultBranchRef')
         if not ref or not ref.get('target', {}).get('history'):
             break
         history = ref['target']['history']
@@ -236,15 +240,13 @@ def fetch_contributed_repos():
         }
     }'''
     data = graphql(query, {'login': USER_NAME})
-    user = data['data']['user']
-    owned = user.get('repositories', {}).get('totalCount') or 0
-    contributed = user.get('repositoriesContributedTo', {}).get('totalCount') or 0
+    owned = graphql_data(data, 'user', 'repositories', 'totalCount', default=0)
+    contributed = graphql_data(data, 'user', 'repositoriesContributedTo', 'totalCount', default=0)
     return owned, contributed
 
 
 def fetch_year_commits():
     """Contributions in the last 365 days via the contribution calendar."""
-    from datetime import datetime, timedelta, timezone
     since = (datetime.now(timezone.utc) - timedelta(days=365)).isoformat()
     query = '''
     query($login: String!, $from: DateTime!) {
@@ -255,7 +257,7 @@ def fetch_year_commits():
         }
     }'''
     data = graphql(query, {'login': USER_NAME, 'from': since})
-    return data['data']['user']['contributionsCollection']['contributionCalendar']['totalContributions']
+    return graphql_data(data, 'user', 'contributionsCollection', 'contributionCalendar', 'totalContributions', default=0)
 
 
 def justify_format(root, element_id, new_text, length=0):
@@ -292,6 +294,23 @@ def svg_overwrite(filename, repo_data, contrib_data, commit_data, loc_data, loc_
     tree.write(filename, encoding='utf-8', xml_declaration=True)
 
 
+def bump_readme_cache():
+    """Increment the ?v=<n> cache-busting parameter in README.md."""
+    with open('README.md', 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    pattern = re.compile(r'\?v=(\d+)')
+
+    def increment(match):
+        return f'?v={int(match.group(1)) + 1}'
+
+    new_content, count = pattern.subn(increment, content)
+    if count > 0:
+        with open('README.md', 'w', encoding='utf-8') as f:
+            f.write(new_content)
+    return count
+
+
 if __name__ == '__main__':
     OWNER_ID = get_owner_id()
     repos, commits, add, dele, loc = fetch_repos_and_loc()
@@ -302,4 +321,9 @@ if __name__ == '__main__':
     for svg in ('dark_mode.svg', 'light_mode.svg'):
         svg_overwrite(svg, owned, contributed, year_commits, loc, add, dele, age)
 
+    bumped = bump_readme_cache()
     print(f'Updated: age={age}, {owned} repos, {contributed} contributed, {year_commits} year commits, {loc:,} LOC ({add:,}++ / {dele:,}--)')
+    if bumped:
+        print(f'Cache: bumped ?v= in README.md ({bumped} occurrence(s))')
+    else:
+        print('Cache: no ?v= found in README.md')

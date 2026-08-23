@@ -1,2 +1,1 @@
-requests
-lxml
+# today.py only uses the Python standard library; no third-party packages needed.

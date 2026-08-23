@@ -227,12 +227,12 @@ def fetch_repos_and_loc():
 
 
 def fetch_contributed_repos():
-    """Count repos the user has contributed to (owned + collaborator + org)."""
+    """Count repos the user owns/collaborates on, and repos contributed to."""
     query = '''
     query($login: String!) {
         user(login: $login) {
-            repositories(first: 100, ownerAffiliations: OWNER) { totalCount }
-            repositoriesContributedTo(first: 100) { totalCount }
+            repositories(first: 100, ownerAffiliations: [OWNER, COLLABORATOR]) { totalCount }
+            repositoriesContributedTo(first: 100, includeUserRepositories: false) { totalCount }
         }
     }'''
     data = graphql(query, {'login': USER_NAME})

@@ -48,8 +48,8 @@
 <tspan x="350" y="390" class="cc">. </tspan><tspan class="key">Discord</tspan>:<tspan class="cc"> .......................... </tspan><tspan class="value">pablo.java</tspan>
 <tspan x="350" y="410" class="cc">. </tspan>
 <tspan x="350" y="430">- GitHub Stats</tspan> -—————————————————————————————————————————-—-
-<tspan x="350" y="450" class="cc">. </tspan><tspan class="key">Repos</tspan>:<tspan class="cc" id="repo_data_dots"> ..... </tspan><tspan class="value" id="repo_data">6</tspan> {<tspan class="key">Contributed</tspan>: <tspan class="value" id="contrib_data">6</tspan>}
+<tspan x="350" y="450" class="cc">. </tspan><tspan class="key">Repos</tspan>:<tspan class="cc" id="repo_data_dots"> .... </tspan><tspan class="value" id="repo_data">19</tspan> {<tspan class="key">Contributed</tspan>: <tspan class="value" id="contrib_data">6</tspan>}
 <tspan x="350" y="470" class="cc">. </tspan><tspan class="key">Commits</tspan>:<tspan class="cc" id="commit_data_dots"> ...... </tspan><tspan class="value" id="commit_data">1302</tspan>
-<tspan x="350" y="490" class="cc">. </tspan><tspan class="key">Lines of Code on GitHub</tspan>:<tspan class="cc" id="loc_data_dots"> ..... </tspan><tspan class="value" id="loc_data">15440</tspan> ( <tspan class="value" id="loc_add" style="fill:#3fb950">18963</tspan><tspan class="value" style="fill:#3fb950">++</tspan>, <tspan class="value" id="loc_del" style="fill:#f85149">3523</tspan><tspan class="value" style="fill:#f85149">--</tspan> )
+<tspan x="350" y="490" class="cc">. </tspan><tspan class="key">Lines of Code on GitHub</tspan>:<tspan class="cc" id="loc_data_dots"> ... </tspan><tspan class="value" id="loc_data">1264207</tspan> ( <tspan class="value" id="loc_add" style="fill:#3fb950">2037072</tspan><tspan class="value" style="fill:#3fb950">++</tspan>, <tspan class="value" id="loc_del" style="fill:#f85149">772865</tspan><tspan class="value" style="fill:#f85149">--</tspan> )
 </text>
 </svg>

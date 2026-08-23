@@ -78,39 +78,75 @@ def get_owner_id():
     return data['data']['user']['id']
 
 
-def get_all_repos(owner_id):
-    """Return all repositories the user owns or has contributed to."""
-    query = '''
-    query($owner_id: ID!) {
-        user(login: $owner_id) {
-            repositories(first: 100, ownerAffiliations: OWNER) {
-                nodes {
-                    nameWithOwner
-                    defaultBranchRef { target { ... on Commit { history { totalCount } } } }
-                }
-            }
-        }
-    }'''
-    # GraphQL doesn't accept login as an ID directly; use login-based query
-    query2 = '''
-    query($login: String!) {
-        user(login: $login) {
-            repositories(first: 100, ownerAffiliations: OWNER) {
-                nodes {
-                    nameWithOwner
-                    defaultBranchRef {
-                        target {
-                            ... on Commit {
-                                history { totalCount }
+def get_all_repos():
+    """Return all repositories the user owns, collaborates on, or has contributed to."""
+    repos = {}
+
+    # Owned + collaborator repos (paginated)
+    cursor = None
+    while True:
+        query = '''
+        query($login: String!, $cursor: String) {
+            user(login: $login) {
+                repositories(first: 100, after: $cursor, ownerAffiliations: [OWNER, COLLABORATOR]) {
+                    nodes {
+                        nameWithOwner
+                        defaultBranchRef {
+                            target {
+                                ... on Commit {
+                                    history { totalCount }
+                                }
                             }
                         }
                     }
+                    pageInfo { endCursor hasNextPage }
                 }
             }
-        }
-    }'''
-    data = graphql(query2, {'login': USER_NAME})
-    return data['data']['user']['repositories']['nodes']
+        }'''
+        data = graphql(query, {'login': USER_NAME, 'cursor': cursor})
+        repo_data = data['data']['user']['repositories']
+        for node in repo_data.get('nodes', []):
+            name = node.get('nameWithOwner')
+            if name:
+                repos[name] = node
+        page_info = repo_data.get('pageInfo', {})
+        if not page_info.get('hasNextPage'):
+            break
+        cursor = page_info.get('endCursor')
+
+    # Repos contributed to (paginated, excluding already-owned repos)
+    cursor = None
+    while True:
+        query = '''
+        query($login: String!, $cursor: String) {
+            user(login: $login) {
+                repositoriesContributedTo(first: 100, after: $cursor, includeUserRepositories: false) {
+                    nodes {
+                        nameWithOwner
+                        defaultBranchRef {
+                            target {
+                                ... on Commit {
+                                    history { totalCount }
+                                }
+                            }
+                        }
+                    }
+                    pageInfo { endCursor hasNextPage }
+                }
+            }
+        }'''
+        data = graphql(query, {'login': USER_NAME, 'cursor': cursor})
+        contributed = data['data']['user']['repositoriesContributedTo']
+        for node in contributed.get('nodes', []):
+            name = node.get('nameWithOwner')
+            if name and name not in repos:
+                repos[name] = node
+        page_info = contributed.get('pageInfo', {})
+        if not page_info.get('hasNextPage'):
+            break
+        cursor = page_info.get('endCursor')
+
+    return list(repos.values())
 
 
 def fetch_commits_for_repo(repo_name, total_commits):
@@ -151,9 +187,9 @@ def fetch_commits_for_repo(repo_name, total_commits):
         for edge in history.get('edges', []):
             node = edge.get('node', {})
             author = (node.get('author') or {}).get('user') or {}
-            additions += node.get('additions') or 0
-            deletions += node.get('deletions') or 0
             if author.get('id') == OWNER_ID:
+                additions += node.get('additions') or 0
+                deletions += node.get('deletions') or 0
                 my_commits += 1
         if not history.get('pageInfo', {}).get('hasNextPage'):
             break
@@ -163,7 +199,7 @@ def fetch_commits_for_repo(repo_name, total_commits):
 
 def fetch_repos_and_loc():
     """Total repos, LOC and per-repo commit stats."""
-    repos = get_all_repos(OWNER_ID)
+    repos = get_all_repos()
     total_repos = len(repos)
     total_additions = 0
     total_deletions = 0

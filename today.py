@@ -106,6 +106,8 @@ def get_all_repos():
         data = graphql(query, {'login': USER_NAME, 'cursor': cursor})
         repo_data = data['data']['user']['repositories']
         for node in repo_data.get('nodes', []):
+            if not node:
+                continue
             name = node.get('nameWithOwner')
             if name:
                 repos[name] = node
@@ -138,6 +140,8 @@ def get_all_repos():
         data = graphql(query, {'login': USER_NAME, 'cursor': cursor})
         contributed = data['data']['user']['repositoriesContributedTo']
         for node in contributed.get('nodes', []):
+            if not node:
+                continue
             name = node.get('nameWithOwner')
             if name and name not in repos:
                 repos[name] = node

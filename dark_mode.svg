@@ -29,7 +29,7 @@
 <text x="350" y="30" fill="#c9d1d9">
 <tspan x="350" y="30">pablo@github</tspan> -———————————————————————————————————————————-—-
 <tspan x="350" y="50" class="cc">. </tspan><tspan class="key">OS</tspan>:<tspan class="cc"> ........................... </tspan><tspan class="value">Windows, Linux</tspan>
-<tspan x="350" y="70" class="cc">. </tspan><tspan class="key">Uptime</tspan>:<tspan class="cc"> .................... </tspan><tspan class="value" id="age_data">19 years, 10 months, 13 days</tspan>
+<tspan x="350" y="70" class="cc">. </tspan><tspan class="key">Uptime</tspan>:<tspan class="cc"> .................... </tspan><tspan class="value" id="age_data">19 years, 10 months, 14 days</tspan>
 <tspan x="350" y="90" class="cc">. </tspan><tspan class="key">IDE</tspan>:<tspan class="cc"> ........................... </tspan><tspan class="value">VSCode, Trae</tspan>
 <tspan x="350" y="110" class="cc">. </tspan><tspan class="key">Harness</tspan>:<tspan class="cc"> ...................... </tspan><tspan class="value">CommandCode, Hermes</tspan>
 <tspan x="350" y="130" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Programming</tspan>:<tspan class="cc"> ..... </tspan><tspan class="value">Python, TypeScript, JavaScript, Go, Java</tspan>
@@ -48,8 +48,8 @@
 <tspan x="350" y="390" class="cc">. </tspan><tspan class="key">Discord</tspan>:<tspan class="cc"> .......................... </tspan><tspan class="value">pablo.java</tspan>
 <tspan x="350" y="410" class="cc">. </tspan>
 <tspan x="350" y="430">- GitHub Stats</tspan> -—————————————————————————————————————————-—-
-<tspan x="350" y="450" class="cc">. </tspan><tspan class="key">Repos</tspan>:<tspan class="cc" id="repo_data_dots"> .... </tspan><tspan class="value" id="repo_data">19</tspan> {<tspan class="key">Contributed</tspan>: <tspan class="value" id="contrib_data">6</tspan>}
-<tspan x="350" y="470" class="cc">. </tspan><tspan class="key">Commits</tspan>:<tspan class="cc" id="commit_data_dots"> ...... </tspan><tspan class="value" id="commit_data">1305</tspan>
-<tspan x="350" y="490" class="cc">. </tspan><tspan class="key">Lines of Code on GitHub</tspan>:<tspan class="cc" id="loc_data_dots"> ... </tspan><tspan class="value" id="loc_data">1264309</tspan> ( <tspan class="value" id="loc_add" style="fill:#3fb950">2037247</tspan><tspan class="value" style="fill:#3fb950">++</tspan>, <tspan class="value" id="loc_del" style="fill:#f85149">772938</tspan><tspan class="value" style="fill:#f85149">--</tspan> )
+<tspan x="350" y="450" class="cc">. </tspan><tspan class="key">Repos</tspan>:<tspan class="cc" id="repo_data_dots"> .... </tspan><tspan class="value" id="repo_data">20</tspan> {<tspan class="key">Contributed</tspan>: <tspan class="value" id="contrib_data">6</tspan>}
+<tspan x="350" y="470" class="cc">. </tspan><tspan class="key">Commits</tspan>:<tspan class="cc" id="commit_data_dots"> ...... </tspan><tspan class="value" id="commit_data">1317</tspan>
+<tspan x="350" y="490" class="cc">. </tspan><tspan class="key">Lines of Code on GitHub</tspan>:<tspan class="cc" id="loc_data_dots"> ... </tspan><tspan class="value" id="loc_data">1269533</tspan> ( <tspan class="value" id="loc_add" style="fill:#3fb950">2042511</tspan><tspan class="value" style="fill:#3fb950">++</tspan>, <tspan class="value" id="loc_del" style="fill:#f85149">772978</tspan><tspan class="value" style="fill:#f85149">--</tspan> )
 </text>
 </svg>

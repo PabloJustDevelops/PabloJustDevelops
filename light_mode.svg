@@ -29,7 +29,7 @@
 <text x="350" y="30" fill="#c9d1d9">
 <tspan x="350" y="30">pablo@github</tspan> -———————————————————————————————————————————-—-
 <tspan x="350" y="50" class="cc">. </tspan><tspan class="key">OS</tspan>:<tspan class="cc"> ........................... </tspan><tspan class="value">Windows, Linux</tspan>
-<tspan x="350" y="70" class="cc">. </tspan><tspan class="key">Uptime</tspan>:<tspan class="cc"> .................... </tspan><tspan class="value" id="age_data">19 years, 10 months, 20 days</tspan>
+<tspan x="350" y="70" class="cc">. </tspan><tspan class="key">Uptime</tspan>:<tspan class="cc"> .................... </tspan><tspan class="value" id="age_data">19 years, 10 months, 21 days</tspan>
 <tspan x="350" y="90" class="cc">. </tspan><tspan class="key">IDE</tspan>:<tspan class="cc"> ........................... </tspan><tspan class="value">VSCode, Trae</tspan>
 <tspan x="350" y="110" class="cc">. </tspan><tspan class="key">Harness</tspan>:<tspan class="cc"> ...................... </tspan><tspan class="value">CommandCode, Hermes</tspan>
 <tspan x="350" y="130" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Programming</tspan>:<tspan class="cc"> ..... </tspan><tspan class="value">Python, TypeScript, JavaScript, Go, Java</tspan>

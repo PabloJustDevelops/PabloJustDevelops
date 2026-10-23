@@ -10,9 +10,12 @@ Run with:
 
 import calendar
 import hashlib
+from concurrent.futures import ThreadPoolExecutor
 import http.client
 import json
 import os
+import queue
+import threading
 import random
 import re
 import socket
@@ -21,6 +24,7 @@ import urllib.request
 import urllib.error
 import xml.etree.ElementTree as ET
 from datetime import date, datetime, timedelta, timezone
+from pathlib import Path
 
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 USER_NAME = os.environ.get('USER_NAME', 'PabloJustDevelops')
@@ -31,6 +35,11 @@ BIRTHDAY = (2006, 10, 11)  # (year, month, day)
 # Network policy: GitHub's GraphQL endpoint answers with 502/503/504 and
 # occasional hangs; a single one of those must not fail the whole run.
 REQUEST_TIMEOUT = float(os.environ.get('GRAPHQL_TIMEOUT', '45'))
+STATS_WORKERS = int(os.environ.get('STATS_WORKERS', '12'))   # peticiones en paralelo
+CACHE_FILE = 'cache/loc-stats.json'
+FULL_REFRESH_DAYS = int(os.environ.get('STATS_FULL_REFRESH_DAYS', '30'))
+MAX_DELTA_COMMITS = 3000          # por encima de esto, recorrido completo
+REFRESH_SLICE = int(os.environ.get('STATS_REFRESH_SLICE', '8'))   # repos a revalidar por run
 MAX_ATTEMPTS = int(os.environ.get('GRAPHQL_MAX_ATTEMPTS', '6'))
 RETRYABLE_STATUS = {429, 500, 502, 503, 504}
 TRANSIENT_ERRORS = (
@@ -69,6 +78,31 @@ def calculate_age():
     return f'{years} years, {months} months, {days} days'
 
 
+def open_with_deadline(request, deadline):
+    """urllib no tiene timeout total: un watchdog corta a los `deadline` segundos.
+
+    Sin esto una respuesta que gotea se queda minutos (el 502 que tumbó el run
+    del 23-oct tardó ~6 min en llegar con timeout de socket ya puesto).
+    """
+    result = queue.Queue(maxsize=1)
+
+    def worker():
+        try:
+            with urllib.request.urlopen(request, timeout=deadline) as response:
+                result.put(('ok', response.read()))
+        except BaseException as error:      # se re-lanza en el hilo llamante
+            result.put(('error', error))
+
+    threading.Thread(target=worker, daemon=True).start()
+    try:
+        kind, payload = result.get(timeout=deadline)
+    except queue.Empty:
+        raise TimeoutError(f'sin respuesta en {deadline:.0f}s')
+    if kind == 'error':
+        raise payload
+    return payload
+
+
 def graphql(query, variables, attempts=None):
     """POST a GraphQL query, retrying transient failures with backoff.
 
@@ -87,8 +121,7 @@ def graphql(query, variables, attempts=None):
         )
         delay = None
         try:
-            with urllib.request.urlopen(request, timeout=REQUEST_TIMEOUT) as response:
-                return json.loads(response.read().decode('utf-8'))
+            return json.loads(open_with_deadline(request, REQUEST_TIMEOUT).decode('utf-8'))
         except urllib.error.HTTPError as error:
             detail = error.read().decode('utf-8', 'replace')[:400]
             retryable = error.code in RETRYABLE_STATUS or (
@@ -209,13 +242,19 @@ def get_all_repos():
     return list(repos.values())
 
 
-def fetch_commits_for_repo(repo_name, total_commits):
-    """Count additions and deletions for a single repo across all commits."""
+def fetch_commits_for_repo(repo_name, total_commits, max_commits=None):
+    """Count additions and deletions for a single repo across all commits.
+
+    `max_commits` corta el recorrido: con caché solo interesan los commits
+    nuevos (los más recientes). Se corta por número de commits, no por página:
+    una página trae 100 y sumarlos todos inflaría el total.
+    """
     owner, name = repo_name.split('/')
     additions = 0
     deletions = 0
     my_commits = 0
     cursor = None
+    seen = 0
     while True:
         variables = {'owner': owner, 'name': name, 'cursor': cursor}
         query = '''
@@ -244,41 +283,140 @@ def fetch_commits_for_repo(repo_name, total_commits):
         if not ref or not ref.get('target', {}).get('history'):
             break
         history = ref['target']['history']
+        stop = False
         for edge in history.get('edges', []):
+            if max_commits is not None and seen >= max_commits:
+                stop = True
+                break
+            seen += 1
             node = edge.get('node', {})
             author = (node.get('author') or {}).get('user') or {}
             if author.get('id') == OWNER_ID:
                 additions += node.get('additions') or 0
                 deletions += node.get('deletions') or 0
                 my_commits += 1
-        if not history.get('pageInfo', {}).get('hasNextPage'):
+        if stop or not history.get('pageInfo', {}).get('hasNextPage'):
             break
         cursor = history['pageInfo']['endCursor']
     return additions, deletions, my_commits
 
 
+def load_stats_cache():
+    try:
+        data = json.loads(Path(CACHE_FILE).read_text(encoding='utf-8'))
+        return data if isinstance(data, dict) else {}
+    except (OSError, ValueError):
+        return {}
+
+
+def save_stats_cache(repos):
+    Path(CACHE_FILE).parent.mkdir(parents=True, exist_ok=True)
+    Path(CACHE_FILE).write_text(
+        json.dumps({'generated_at': datetime.now(timezone.utc).isoformat(timespec='seconds'),
+                    'repos': repos}, indent=1, sort_keys=True) + '\n',
+        encoding='utf-8')
+
+
+def cache_age_days(cache):
+    stamp = cache.get('generated_at')
+    if not stamp:
+        return None
+    try:
+        return (datetime.now(timezone.utc) - datetime.fromisoformat(stamp)).total_seconds() / 86400
+    except ValueError:
+        return None
+
+
 def fetch_repos_and_loc():
-    """Total repos, LOC and per-repo commit stats."""
+    """Total repos, LOC y commits, con caché por repo.
+
+    Recorrer el historial entero cuesta una petición por cada 100 commits y eso
+    era el 95% del tiempo del job (11 min). Ahora: si el repo no ha cambiado se
+    reutiliza su entrada (0 peticiones), si tiene commits nuevos se recorren
+    solo las páginas nuevas, y cada `FULL_REFRESH_DAYS` se rehace entero para
+    que no se quede pegado a un historial reescrito.
+    """
     repos = get_all_repos()
     total_repos = len(repos)
-    total_additions = 0
-    total_deletions = 0
-    total_commits = 0
+    cache = load_stats_cache()
+    age = cache_age_days(cache)
+    entries = dict(cache.get('repos', {}))
+    generated = cache.get('generated_at')
+    for entry in entries.values():
+        entry.setdefault('full_at', generated)
+
+    # El refresco completo se reparte: como mucho REFRESH_SLICE repos por run, los
+    # más viejos primero. Así ningún run se va a minutos y todo se revalida en unos días.
+    cutoff = (datetime.now(timezone.utc) - timedelta(days=FULL_REFRESH_DAYS)).isoformat(timespec='seconds')
+    due = sorted(name for name, e in entries.items()
+                 if not e.get('full_at') or e['full_at'] < cutoff)
+    refresh_slice = set(due[:REFRESH_SLICE])
+
+    names_now, reusable, plan = set(), [], []
     for repo in repos:
         name = repo.get('nameWithOwner', '')
         if not name:
             continue
-        history_count = 0
         ref = repo.get('defaultBranchRef')
+        commits_now = 0
         if ref and ref.get('target', {}).get('history'):
-            history_count = ref['target']['history'].get('totalCount') or 0
-        if history_count == 0:
+            commits_now = ref['target']['history'].get('totalCount') or 0
+        if commits_now == 0:
+            entries.pop(name, None)
             continue
-        add, dele, commits = fetch_commits_for_repo(name, history_count)
-        total_additions += add
-        total_deletions += dele
-        total_commits += commits
+        names_now.add(name)
+        entry = entries.get(name)
+        if name not in refresh_slice and entry and entry.get('commits') == commits_now:
+            reusable.append(name)
+            continue
+        delta = commits_now - (entry or {}).get('commits', 0)
+        if entry and name not in refresh_slice and 0 < delta <= MAX_DELTA_COMMITS:
+            mode = 'delta'                     # solo las páginas nuevas
+        else:
+            mode = 'full'                      # alta, reescritura o revalidación
+        plan.append((name, mode, commits_now, entry or {}, delta))
+
+    started = time.monotonic()
+
+    def work(item):
+        name, mode, commits_now, entry, delta = item
+        # en delta solo cuentan los commits nuevos, no la página entera
+        limit = None if mode == 'full' else max(1, delta)
+        add, dele, mine = fetch_commits_for_repo(name, commits_now, limit)
+        if mode == 'delta':
+            add += entry.get('additions', 0)
+            dele += entry.get('deletions', 0)
+            mine += entry.get('mine', 0)
+        entry = {'commits': commits_now, 'additions': add, 'deletions': dele, 'mine': mine}
+        if mode == 'full':
+            entry['full_at'] = datetime.now(timezone.utc).isoformat(timespec='seconds')
+        else:
+            entry['full_at'] = (entries.get(name) or {}).get('full_at')
+        return name, entry
+
+    failures = []
+    with ThreadPoolExecutor(max_workers=max(1, STATS_WORKERS)) as pool:
+        futures = [pool.submit(work, item) for item in plan]
+        for future, item in zip(futures, plan):
+            try:
+                name, entry = future.result()
+                entries[name] = entry
+            except Exception as error:      # no se inventan cifras: se aborta
+                failures.append(f'{item[0]}: {error}')
+    if failures:
+        raise Exception(f'No se pudieron leer {len(failures)} repo(s): ' + '; '.join(failures[:3]))
+
+    current = set(entries) & set(names_now)
+    totals = [entries[name] for name in current]
+    total_additions = sum(t.get('additions', 0) for t in totals)
+    total_deletions = sum(t.get('deletions', 0) for t in totals)
+    total_commits = sum(t.get('mine', 0) for t in totals)
     loc = total_additions - total_deletions
+
+    save_stats_cache(entries)
+    print(f'Stats: {len(plan)} a consultar (reutilizados {len(reusable)}, '
+          f'completos {sum(1 for p in plan if p[1] == "full")}) en '
+          f'{time.monotonic() - started:.1f}s con {STATS_WORKERS} hilos', flush=True)
     return total_repos, total_commits, total_additions, total_deletions, loc
 
 

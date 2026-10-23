@@ -1,0 +1,264 @@
+{
+ "generated_at": "2026-10-23T12:56:56+00:00",
+ "repos": {
+  "CommandCodeAI/command-code": {
+   "additions": 0,
+   "commits": 50,
+   "deletions": 0,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 0
+  },
+  "CommandCodeAI/desktop": {
+   "additions": 0,
+   "commits": 17,
+   "deletions": 0,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 0
+  },
+  "PabloJustDevelops/Automata-Core-App": {
+   "additions": 8471,
+   "commits": 3,
+   "deletions": 0,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 3
+  },
+  "PabloJustDevelops/Brandio-Car-Detection": {
+   "additions": 6690,
+   "commits": 6,
+   "deletions": 2034,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 6
+  },
+  "PabloJustDevelops/Migracion-SP3-SP4": {
+   "additions": 1192509,
+   "commits": 15,
+   "deletions": 554876,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 15
+  },
+  "PabloJustDevelops/PabloJustDevelops": {
+   "additions": 7412,
+   "commits": 221,
+   "deletions": 1984,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 114
+  },
+  "PabloJustDevelops/Song-Recommender-Future-Proyect": {
+   "additions": 2,
+   "commits": 2,
+   "deletions": 1,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 2
+  },
+  "PabloJustDevelops/TravelPal": {
+   "additions": 298105,
+   "commits": 435,
+   "deletions": 152724,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 434
+  },
+  "PabloJustDevelops/commandcode-forge": {
+   "additions": 5264,
+   "commits": 3,
+   "deletions": 40,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 3
+  },
+  "PabloJustDevelops/dotfiles": {
+   "additions": 4072,
+   "commits": 15,
+   "deletions": 1746,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 15
+  },
+  "PabloJustDevelops/file-organizer-cli": {
+   "additions": 275069,
+   "commits": 38,
+   "deletions": 86127,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 32
+  },
+  "PabloJustDevelops/gigabyte-g5-kc-driver-keyboard": {
+   "additions": 75017,
+   "commits": 48,
+   "deletions": 39212,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 43
+  },
+  "PabloJustDevelops/hermes-skills-windows": {
+   "additions": 29219,
+   "commits": 5,
+   "deletions": 237,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 5
+  },
+  "PabloJustDevelops/hermes-skins": {
+   "additions": 2209,
+   "commits": 5,
+   "deletions": 924,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 5
+  },
+  "PabloJustDevelops/landing-fo": {
+   "additions": 91393,
+   "commits": 18,
+   "deletions": 598,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 15
+  },
+  "PabloJustDevelops/llm-guardrail": {
+   "additions": 117,
+   "commits": 1,
+   "deletions": 0,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 1
+  },
+  "PabloJustDevelops/mybudget": {
+   "additions": 31004,
+   "commits": 12,
+   "deletions": 162,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 12
+  },
+  "PabloJustDevelops/nx-workspace-testing": {
+   "additions": 45209,
+   "commits": 5,
+   "deletions": 36,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 5
+  },
+  "PabloJustDevelops/pablo-portfolio": {
+   "additions": 9748,
+   "commits": 19,
+   "deletions": 974,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 18
+  },
+  "PabloJustDevelops/packetly": {
+   "additions": 95149,
+   "commits": 37,
+   "deletions": 24313,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 37
+  },
+  "PabloJustDevelops/practica-pytest-github": {
+   "additions": 89,
+   "commits": 5,
+   "deletions": 3,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 5
+  },
+  "PabloJustDevelops/reformashgalbacete": {
+   "additions": 37660,
+   "commits": 24,
+   "deletions": 1324,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 24
+  },
+  "PabloJustDevelops/retrovisor-band": {
+   "additions": 35245,
+   "commits": 1,
+   "deletions": 0,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 1
+  },
+  "PabloJustDevelops/self-hosted-monorepo": {
+   "additions": 625222,
+   "commits": 95,
+   "deletions": 228196,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 70
+  },
+  "PabloJustDevelops/skill-hub-mod": {
+   "additions": 713,
+   "commits": 3,
+   "deletions": 36,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 3
+  },
+  "PabloJustDevelops/sp4_cliente_visor": {
+   "additions": 15973,
+   "commits": 1,
+   "deletions": 0,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 1
+  },
+  "PabloJustDevelops/strain-repo": {
+   "additions": 231006,
+   "commits": 195,
+   "deletions": 96710,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 185
+  },
+  "PabloJustDevelops/taste-quiet-mod": {
+   "additions": 566,
+   "commits": 1,
+   "deletions": 0,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 1
+  },
+  "PabloJustDevelops/typesafe-sandbox": {
+   "additions": 10908,
+   "commits": 27,
+   "deletions": 334,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 27
+  },
+  "PabloJustDevelops/v3_proyectoVozVistaApps": {
+   "additions": 1385,
+   "commits": 6,
+   "deletions": 6,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 6
+  },
+  "QuantGeekDev/docker-mcp": {
+   "additions": 0,
+   "commits": 20,
+   "deletions": 0,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 0
+  },
+  "openai/codex": {
+   "additions": 0,
+   "commits": 12568,
+   "deletions": 0,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 0
+  },
+  "rlaope/oh-my-hermes": {
+   "additions": 0,
+   "commits": 5517,
+   "deletions": 0,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 0
+  },
+  "tsig-idr-uclm/FAO-BEFS-pilot-client": {
+   "additions": 96364,
+   "commits": 476,
+   "deletions": 0,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 1
+  },
+  "tsig-idr-uclm/sp4-libs": {
+   "additions": 342252,
+   "commits": 685,
+   "deletions": 160313,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 659
+  },
+  "tsig-idr-uclm/spider-interfaces": {
+   "additions": 22586,
+   "commits": 34,
+   "deletions": 3674,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 32
+  },
+  "tsig-idr-uclm/visorBetaTS": {
+   "additions": 0,
+   "commits": 41,
+   "deletions": 0,
+   "full_at": "2026-10-23T12:50:39+00:00",
+   "mine": 0
+  }
+ }
+}

@@ -9,6 +9,7 @@ Run with:
 """
 
 import calendar
+import hashlib
 import http.client
 import json
 import os
@@ -385,13 +386,20 @@ if __name__ == '__main__':
         stats.update(loc_data=loc, loc_add=add, loc_del=dele)
 
     age = calculate_age()
+    before = {svg: hashlib.sha256(open(svg, 'rb').read()).hexdigest() for svg in SVGS}
     for svg in SVGS:
         svg_overwrite(svg, stats, age)
+    changed = [svg for svg in SVGS
+               if hashlib.sha256(open(svg, 'rb').read()).hexdigest() != before[svg]]
 
-    bumped = bump_readme_cache()
+    # sin cambios reales no hay nada que cachear: evita commits que solo suben ?v=
+    bumped = bump_readme_cache() if changed else 0
+    print('SVG modificados: ' + (', '.join(changed) or 'ninguno'))
     print('Stats en el diseño: ' + (', '.join(f'{k}={v}' for k, v in sorted(stats.items())) or 'ninguna'))
     print(f'Updated: age={age}')
     if bumped:
         print(f'Cache: bumped ?v= in README.md ({bumped} occurrence(s))')
-    else:
+    elif changed:
         print('Cache: no ?v= found in README.md')
+    else:
+        print('Cache: sin cambios en los SVG, no se toca el README')

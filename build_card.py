@@ -77,15 +77,23 @@ def esc(text):
     return text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
 
 
+NBSP = '\u00a0'  # GitHub recorta los espacios ASCII al final de un <tspan>
+
+
+def pad(text, width):
+    """Relleno con espacio duro: el sanitizador de GitHub no los recorta."""
+    if len(text) > width:
+        raise ValueError(f'texto {text!r} más largo que la columna ({width})')
+    return text.ljust(width).replace(' ', NBSP)
+
+
 def kv(key, value, width=12, value_id=None):
-    if len(key) > width:
-        raise ValueError(f'clave {key!r} más larga que la columna ({width})')
     span = (value, 'ink') if value_id is None else (value, 'ink', value_id)
-    return ('row', [(f'{key:<{width}} ', 'key'), span])
+    return ('row', [(pad(key, width) + NBSP, 'key'), span])
 
 
 def now_row(name, kind, desc):
-    return ('row', [(f'{name:<14}', 'key'), (f' {kind:<7} ', 'ink'), (desc, 'ink')])
+    return ('row', [(pad(name, 14), 'key'), (NBSP + pad(kind, 7) + NBSP, 'ink'), (desc, 'ink')])
 
 
 def build_lines(age):

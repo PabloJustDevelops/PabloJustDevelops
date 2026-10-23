@@ -51,6 +51,11 @@ LINE_H = 20
 PAD = 15
 INFO_X = 350            # misma posición que la tarjeta original
 WIDTH = 985
+PIXEL_FILE = os.environ.get('CARD_PIXEL') or ('avatar.png' if os.path.exists('avatar.png') else None)
+PIXEL_SIZE = int(os.environ.get('CARD_PIXEL_SIZE', '300'))
+ART_FILE = os.environ.get('CARD_ART', 'art.txt')
+if os.path.exists(ART_FILE):
+    ART = Path(ART_FILE).read_text(encoding='utf-8')
 ART_LINES = ART.splitlines()
 NBSP = '\u00a0'  # GitHub recorta los espacios ASCII al final de un <tspan>
 
@@ -120,7 +125,38 @@ def content(age):
     return lines
 
 
-def build_svg(path, theme, age):
+def pixel_rects(png_path, x0, y0, size):
+    """Convierte el PNG pequeño en <rect> (sin <image> ni data URI: GitHub los
+    sanitiza y no son de fiar). Agrupa píxeles contiguos del mismo color."""
+    from PIL import Image
+    img = Image.open(png_path).convert('RGB')
+    n = img.width
+    cell = size / n
+    px = img.load()
+    out = []
+    rgba = img.convert('RGBA')
+    alpha = rgba.split()[3]
+    ap = alpha.load()
+
+    def visible(col, row):
+        return ap[min(col, n - 1), row] > 8
+
+    for row in range(n):
+        run_start, run_color = 0, px[0, row]
+        for col in range(1, n + 1):
+            color = px[col, row] if col < n else None
+            if color != run_color or (col < n and visible(col, row) != visible(run_start, row)):
+                if visible(run_start, row):
+                    x = round(x0 + run_start * cell, 2)
+                    w = round((col - run_start) * cell, 2)
+                    y = round(y0 + row * cell, 2)
+                    out.append(f'<rect x="{x}" y="{y}" width="{w}" height="{round(cell + 0.05, 2)}" '
+                               f'fill="#{run_color[0]:02x}{run_color[1]:02x}{run_color[2]:02x}"/>')
+                run_start, run_color = col, color
+    return out
+
+
+def build_svg(path, theme, age, out_dir='.'):
     lines = content(age)
     height = LINE_H * max(len(ART_LINES), len(lines)) + PAD * 2
     art_top = PAD + (LINE_H * len(lines) - LINE_H * len(ART_LINES)) // 2
@@ -139,11 +175,14 @@ def build_svg(path, theme, age):
     out.append('</style>')
     out.append(f'<rect width="{WIDTH}" height="{height}" rx="15" fill="{theme["bg"]}"/>')
 
-    out.append(f'<text x="{PAD}" class="ink" xml:space="preserve">')
-    for i, line in enumerate(ART_LINES):
-        y = art_top + LINE_H * (i + 1) - 4
-        out.append(f'<tspan x="{PAD}" y="{y}">{esc(no_trim(line))}</tspan>')
-    out.append('</text>')
+    if PIXEL_FILE:
+        out += pixel_rects(PIXEL_FILE, PAD, (height - PIXEL_SIZE) // 2, PIXEL_SIZE)
+    else:
+        out.append(f'<text x="{PAD}" class="ink" xml:space="preserve">')
+        for i, line in enumerate(ART_LINES):
+            y = art_top + LINE_H * (i + 1) - 4
+            out.append(f'<tspan x="{PAD}" y="{y}">{esc(no_trim(line))}</tspan>')
+        out.append('</text>')
 
     # sin saltos de línea ni sangría entre <tspan>: con xml:space="preserve"
     # cada uno de esos espacios se renderiza y desplaza la columna de valores
@@ -161,7 +200,7 @@ def build_svg(path, theme, age):
     info.append('</text>')
     out.append(''.join(info))
     out.append('</svg>')
-    Path(path).write_text('\n'.join(out) + '\n', encoding='utf-8')
+    Path(out_dir, path).write_text('\n'.join(out) + '\n', encoding='utf-8')
 
     widest = max(sum(len(s[0]) for s in spans) for spans in lines)
     return height, widest
@@ -169,8 +208,9 @@ def build_svg(path, theme, age):
 
 if __name__ == '__main__':
     age = today.calculate_age()
+    out_dir = os.environ.get('CARD_OUT', '.')
     for name, theme in THEMES.items():
-        height, widest = build_svg(name, theme, age)
+        height, widest = build_svg(name, theme, age, out_dir)
         print(f'{name}: {WIDTH}x{height}, línea más larga {widest} columnas '
               f'({round(widest * FONT_SIZE * 0.55 * 1.09)}px, caben {WIDTH - INFO_X - PAD}px)')
     print(f'columna de valores: {COL}, reglas: {RULE_COLS}, uptime="{age}"')

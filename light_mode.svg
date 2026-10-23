@@ -1,70 +1,30 @@
-<?xml version='1.0' encoding='utf-8'?>
-<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="985px" height="490px" font-size="14px">
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,monospace" width="985px" height="550px" font-size="14px">
 <style>
 @font-face { src: local('Consolas'), local('Consolas Bold'); font-family: 'ConsolasFallback'; font-display: swap; -webkit-size-adjust: 109%; size-adjust: 109%; }
-.key {fill: #6d28d9;}.sec {fill: #57606a;}.ink {fill: #1f2328;}.accent {fill: #0969da; font-weight: 600;} text, tspan {white-space: pre;}
+.key {fill: #8250df;}.val {fill: #6d28d9;}.sec {fill: #57606a;}.ink {fill: #1f2328;}.cc, .dots {fill: #9ca3af;}.add {fill: #1a7f37;}.dele {fill: #cf222e;} text, tspan {white-space: pre;}
 </style>
-<rect x="0.5" y="0.5" width="984" height="489" rx="14" fill="#f6f8fa" stroke="#d0d7de" />
+<rect width="985" height="550" rx="15" fill="#f6f8fa"/>
 <text x="15" class="ink" xml:space="preserve">
-<tspan x="15" y="69">%@@-</tspan>
-<tspan x="15" y="89">=#%-:=@#*.</tspan>
-<tspan x="15" y="109">..@%#@+::#%%</tspan>
-<tspan x="15" y="129">.:+@*@@: .=#:</tspan>
-<tspan x="15" y="149">.: .-=.... ...</tspan>
-<tspan x="15" y="169">  ..........-:.</tspan>
-<tspan x="15" y="189">  ........ +* =:</tspan>
-<tspan x="15" y="209">  ........-**-%-</tspan>
-<tspan x="15" y="229">  ........-*%*@=</tspan>
-<tspan x="15" y="249">   . ...... ..#@=</tspan>
-<tspan x="15" y="269">   .=*:... +@@@@@=</tspan>
-<tspan x="15" y="289">  :@@#-... %@@@@@#.</tspan>
-<tspan x="15" y="309">  =@%@+ .. *@@@@@@%</tspan>
-<tspan x="15" y="329">  :@@@%:..-*+#@@@@@</tspan>
-<tspan x="15" y="349">   :+**- :=%**@@@@*</tspan>
-<tspan x="15" y="369">       .::#%@@@@@*</tspan>
-<tspan x="15" y="389">  .-*%*.=#*%#:=%+.</tspan>
-<tspan x="15" y="409">-%**@@***#%+  @%#</tspan>
-<tspan x="15" y="429">   #+.:*******+- -#@</tspan>
+<tspan x="15" y="101">              %@@-</tspan>
+<tspan x="15" y="121">             =#%-:=@#*.</tspan>
+<tspan x="15" y="141">          ...@%#@+::#%%</tspan>
+<tspan x="15" y="161">           .:+@*@@: .=#:</tspan>
+<tspan x="15" y="181">          .: .-=.... ...</tspan>
+<tspan x="15" y="201">            ..........-:.</tspan>
+<tspan x="15" y="221">            ........ +* =:</tspan>
+<tspan x="15" y="241">            ........-**-%-</tspan>
+<tspan x="15" y="261">            ........-*%*@=</tspan>
+<tspan x="15" y="281">             . ...... ..#@=</tspan>
+<tspan x="15" y="301">             .=*:... +@@@@@=</tspan>
+<tspan x="15" y="321">            :@@#-... %@@@@@#.</tspan>
+<tspan x="15" y="341">            =@%@+ .. *@@@@@@%</tspan>
+<tspan x="15" y="361">            :@@@%:..-*+#@@@@@</tspan>
+<tspan x="15" y="381">             :+**- :=%**@@@@*</tspan>
+<tspan x="15" y="401">                 .::#%@@@@@*</tspan>
+<tspan x="15" y="421">            .-*%*.=#*%#:=%+.</tspan>
+<tspan x="15" y="441">          -%**@@***#%+  @%#</tspan>
+<tspan x="15" y="461">             #+.:*******+- -#@</tspan>
 </text>
-<text x="199" xml:space="preserve">
-<tspan x="199" y="29" class="sec">pablo@github ─────────────────────────────────────────────────────────────────</tspan>
-<tspan x="199" y="49"> </tspan>
-<tspan x="199" y="69" class="accent">Pablo Rodríguez Garijo</tspan>
-<tspan x="199" y="89" class="ink">Software Developer | DevOps | AI &amp; Agentic Systems | Cybersecurity</tspan>
-<tspan x="199" y="109" class="key">uptime       </tspan>
-<tspan id="age_data" y="109" class="ink">20 years, 0 months, 12 days</tspan>
-<tspan x="199" y="129"> </tspan>
-<tspan x="199" y="149" class="sec">~/now ────────────────────────────────────────────────────────────────────────</tspan>
-<tspan x="199" y="169" class="key">travelpal     </tspan>
-<tspan y="169" class="ink"> TFG     </tspan>
-<tspan y="169" class="ink">Next.js · InsForge · CSP + HSTS in production</tspan>
-<tspan x="199" y="189" class="key">packetly      </tspan>
-<tspan y="189" class="ink"> Rust    </tspan>
-<tspan y="189" class="ink">CLI network simulator · OSPF, RIP, .pkt files</tspan>
-<tspan x="199" y="209" class="key">llm-guardrail </tspan>
-<tspan y="209" class="ink"> Worker  </tspan>
-<tspan y="209" class="ink">prompt-injection + PII detection, ~700 ms</tspan>
-<tspan x="199" y="229"> </tspan>
-<tspan x="199" y="249" class="sec">~/stack ──────────────────────────────────────────────────────────────────────</tspan>
-<tspan x="199" y="269" class="key">languages    </tspan>
-<tspan y="269" class="ink">Python, TypeScript, JavaScript, Go, Java</tspan>
-<tspan x="199" y="289" class="key">web          </tspan>
-<tspan y="289" class="ink">Astro, React, Next.js, Angular, Tailwind</tspan>
-<tspan x="199" y="309" class="key">data         </tspan>
-<tspan y="309" class="ink">Postgres, MySQL, SQLite, Supabase, Firebase</tspan>
-<tspan x="199" y="329" class="key">infra        </tspan>
-<tspan y="329" class="ink">Docker, Cloudflare Workers, GitHub Actions</tspan>
-<tspan x="199" y="349" class="key">ml / vision  </tspan>
-<tspan y="349" class="ink">PyTorch, Ultralytics, OpenCV, MediaPipe</tspan>
-<tspan x="199" y="369" class="key">testing      </tspan>
-<tspan y="369" class="ink">Playwright, Pytest, Jest, Vitest</tspan>
-<tspan x="199" y="389"> </tspan>
-<tspan x="199" y="409" class="sec">~/contact ────────────────────────────────────────────────────────────────────</tspan>
-<tspan x="199" y="429" class="key">github       </tspan>
-<tspan y="429" class="ink">github.com/PabloJustDevelops</tspan>
-<tspan x="199" y="449" class="key">email        </tspan>
-<tspan y="449" class="ink">pabloroga6@gmail.com</tspan>
-<tspan x="199" y="469" class="key">discord      </tspan>
-<tspan y="469" class="ink">pablo.java</tspan>
-</text>
+<text x="350" xml:space="preserve"><tspan x="350" y="31" class="sec">pablo@github ────────────────────────────────────────────────────────────</tspan><tspan x="350" y="51" class="cc">. </tspan><tspan y="51" class="key">OS</tspan><tspan y="51" class="cc">:</tspan><tspan y="51" class="dots"> ..........................</tspan><tspan y="51" class="val">Windows, Linux</tspan><tspan x="350" y="71" class="cc">. </tspan><tspan y="71" class="key">Uptime</tspan><tspan y="71" class="cc">:</tspan><tspan y="71" class="dots"> ......................</tspan><tspan id="age_data" y="71" class="val">20 years, 0 months, 12 days</tspan><tspan x="350" y="91" class="cc">. </tspan><tspan y="91" class="key">IDE</tspan><tspan y="91" class="cc">:</tspan><tspan y="91" class="dots"> .........................</tspan><tspan y="91" class="val">VSCode, Trae</tspan><tspan x="350" y="111" class="cc">. </tspan><tspan y="111" class="key">Harness</tspan><tspan y="111" class="cc">:</tspan><tspan y="111" class="dots"> .....................</tspan><tspan y="111" class="val">CommandCode, Hermes</tspan><tspan x="350" y="131" class="cc">. </tspan><tspan x="350" y="151" class="cc">. </tspan><tspan y="151" class="key">Languages Programming</tspan><tspan y="151" class="cc">:</tspan><tspan y="151" class="dots"> .......</tspan><tspan y="151" class="val">Python, TypeScript, JavaScript, Go, Java</tspan><tspan x="350" y="171" class="cc">. </tspan><tspan y="171" class="key">Languages Computer</tspan><tspan y="171" class="cc">:</tspan><tspan y="171" class="dots"> ..........</tspan><tspan y="171" class="val">HTML, CSS, JSON, XML, DTD, XSD, YAML</tspan><tspan x="350" y="191" class="cc">. </tspan><tspan y="191" class="key">Languages Data</tspan><tspan y="191" class="cc">:</tspan><tspan y="191" class="dots"> ..............</tspan><tspan y="191" class="val">Postgres, MySQL, Oracle, SQLite, Firebase</tspan><tspan x="350" y="211" class="cc">. </tspan><tspan y="211" class="key">Languages Real</tspan><tspan y="211" class="cc">:</tspan><tspan y="211" class="dots"> ..............</tspan><tspan y="211" class="val">Spanish, English</tspan><tspan x="350" y="231" class="cc">. </tspan><tspan x="350" y="251" class="cc">. </tspan><tspan y="251" class="key">Technologies</tspan><tspan y="251" class="cc">:</tspan><tspan y="251" class="dots"> ................</tspan><tspan y="251" class="val">Astro, React, Next.js, Angular</tspan><tspan x="350" y="271" class="ink">                                </tspan><tspan y="271" class="val">OpenCV, PyTorch, Ultralytics, Whisper</tspan><tspan x="350" y="291" class="ink">                                </tspan><tspan y="291" class="val">MediaPipe, Supabase, Docker, Cloudflare</tspan><tspan x="350" y="311" class="ink">                                </tspan><tspan y="311" class="val">Spring Boot, Java, Android, Playwright</tspan><tspan x="350" y="331" class="ink">                                </tspan><tspan y="331" class="val">Pytest, Jest, Vitest, GitHub Actions</tspan><tspan x="350" y="351" class="ink">                                </tspan><tspan y="351" class="val">OpenLayers, GIS</tspan><tspan x="350" y="371" class="cc">. </tspan><tspan x="350" y="391" class="sec">- Contact ───────────────────────────────────────────────────────────────</tspan><tspan x="350" y="411" class="cc">. </tspan><tspan y="411" class="key">Email</tspan><tspan y="411" class="cc">:</tspan><tspan y="411" class="dots"> .......................</tspan><tspan y="411" class="val">pabloroga6@gmail.com</tspan><tspan x="350" y="431" class="cc">. </tspan><tspan y="431" class="key">Discord</tspan><tspan y="431" class="cc">:</tspan><tspan y="431" class="dots"> .....................</tspan><tspan y="431" class="val">pablo.java</tspan><tspan x="350" y="451" class="cc">. </tspan><tspan x="350" y="471" class="sec">- GitHub Stats ──────────────────────────────────────────────────────────</tspan><tspan x="350" y="491" class="cc">. </tspan><tspan y="491" class="key">Repos</tspan><tspan y="491" class="cc">:</tspan><tspan y="491" class="dots"> .......................</tspan><tspan id="repo_data" y="491" class="val">29</tspan><tspan y="491" class="val"> {Contributed: </tspan><tspan id="contrib_data" y="491" class="val">8</tspan><tspan y="491" class="val">}</tspan><tspan x="350" y="511" class="cc">. </tspan><tspan y="511" class="key">Commits</tspan><tspan y="511" class="cc">:</tspan><tspan y="511" class="dots"> .....................</tspan><tspan id="commit_data" y="511" class="val">2292</tspan><tspan x="350" y="531" class="cc">. </tspan><tspan y="531" class="key">Lines of Code on GitHub</tspan><tspan y="531" class="cc">:</tspan><tspan y="531" class="dots"> .....</tspan><tspan id="loc_data" y="531" class="val">1921497</tspan><tspan y="531" class="val"> ( </tspan><tspan id="loc_add" y="531" class="add">3111713</tspan><tspan y="531" class="add"> ++</tspan><tspan y="531" class="val">, </tspan><tspan id="loc_del" y="531" class="dele">1190216</tspan><tspan y="531" class="dele"> --</tspan><tspan y="531" class="val"> )</tspan></text>
 </svg>

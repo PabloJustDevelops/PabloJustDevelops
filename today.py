@@ -328,16 +328,24 @@ def justify_format(root, element_id, new_text, length=0):
         dots.text = dot_string
 
 
-def svg_overwrite(filename, repo_data, contrib_data, commit_data, loc_data, loc_add, loc_del, age_data=None):
-    """Rewrite the stats placeholders inside one SVG file."""
+STAT_IDS = (('repo_data', 6), ('contrib_data', 0), ('commit_data', 10),
+           ('loc_data', 10), ('loc_add', 10), ('loc_del', 10))
+SVGS = ('dark_mode.svg', 'light_mode.svg')
+
+
+def stats_used():
+    """Qué ids de estadística existen de verdad en los SVG (el diseño puede no tenerlos)."""
+    markup = ''.join(open(f, encoding='utf-8').read() for f in SVGS)
+    return {element_id for element_id, _ in STAT_IDS if f'id="{element_id}"' in markup}
+
+
+def svg_overwrite(filename, stats, age_data=None):
+    """Rewrite the stats placeholders that exist inside one SVG file."""
     tree = ET.parse(filename)
     root = tree.getroot()
-    justify_format(root, 'repo_data', repo_data, 6)
-    justify_format(root, 'contrib_data', contrib_data)
-    justify_format(root, 'commit_data', commit_data, 10)
-    justify_format(root, 'loc_data', loc_data, 10)
-    justify_format(root, 'loc_add', loc_add, 10)
-    justify_format(root, 'loc_del', loc_del, 10)
+    for element_id, width in STAT_IDS:
+        if element_id in stats:
+            justify_format(root, element_id, stats[element_id], width)
     if age_data is not None:
         element = root.find(".//*[@id='age_data']")
         if element is not None:
@@ -363,17 +371,26 @@ def bump_readme_cache():
 
 
 if __name__ == '__main__':
-    OWNER_ID = get_owner_id()
-    repos, commits, add, dele, loc = fetch_repos_and_loc()
-    owned, contributed = fetch_contributed_repos()
-    year_commits = fetch_year_commits()
+    needed = stats_used()
+    stats = {}
+    if needed & {'repo_data', 'contrib_data'}:
+        OWNER_ID = globals().get('OWNER_ID') or get_owner_id()
+        globals()['OWNER_ID'] = OWNER_ID
+        owned, contributed = fetch_contributed_repos()
+        stats['repo_data'], stats['contrib_data'] = owned, contributed
+    if 'commit_data' in needed:
+        stats['commit_data'] = fetch_year_commits()
+    if needed & {'loc_data', 'loc_add', 'loc_del'}:
+        _, _, add, dele, loc = fetch_repos_and_loc()
+        stats.update(loc_data=loc, loc_add=add, loc_del=dele)
 
     age = calculate_age()
-    for svg in ('dark_mode.svg', 'light_mode.svg'):
-        svg_overwrite(svg, owned, contributed, year_commits, loc, add, dele, age)
+    for svg in SVGS:
+        svg_overwrite(svg, stats, age)
 
     bumped = bump_readme_cache()
-    print(f'Updated: age={age}, {owned} repos, {contributed} contributed, {year_commits} year commits, {loc:,} LOC ({add:,}++ / {dele:,}--)')
+    print('Stats en el diseño: ' + (', '.join(f'{k}={v}' for k, v in sorted(stats.items())) or 'ninguna'))
+    print(f'Updated: age={age}')
     if bumped:
         print(f'Cache: bumped ?v= in README.md ({bumped} occurrence(s))')
     else:

@@ -9,9 +9,13 @@ Run with:
 """
 
 import calendar
+import http.client
 import json
 import os
+import random
 import re
+import socket
+import time
 import urllib.request
 import urllib.error
 import xml.etree.ElementTree as ET
@@ -22,6 +26,31 @@ USER_NAME = os.environ.get('USER_NAME', 'PabloJustDevelops')
 GRAPHQL_URL = 'https://api.github.com/graphql'
 ET.register_namespace('', 'http://www.w3.org/2000/svg')
 BIRTHDAY = (2006, 10, 11)  # (year, month, day)
+
+# Network policy: GitHub's GraphQL endpoint answers with 502/503/504 and
+# occasional hangs; a single one of those must not fail the whole run.
+REQUEST_TIMEOUT = float(os.environ.get('GRAPHQL_TIMEOUT', '45'))
+MAX_ATTEMPTS = int(os.environ.get('GRAPHQL_MAX_ATTEMPTS', '6'))
+RETRYABLE_STATUS = {429, 500, 502, 503, 504}
+TRANSIENT_ERRORS = (
+    urllib.error.URLError,
+    TimeoutError,
+    socket.timeout,
+    ConnectionError,
+    http.client.HTTPException,
+    json.JSONDecodeError,
+)
+
+
+def retry_delay(attempt, retry_after=None):
+    """Exponential backoff with jitter, honouring a Retry-After header."""
+    if retry_after:
+        try:
+            return min(float(retry_after), 90.0)
+        except (TypeError, ValueError):
+            pass
+    base = min(60.0, 2.0 ** (attempt - 1))  # 1, 2, 4, 8, 16, 32 s
+    return base + random.uniform(0, base * 0.25)
 
 
 def calculate_age():
@@ -39,20 +68,42 @@ def calculate_age():
     return f'{years} years, {months} months, {days} days'
 
 
-def graphql(query, variables):
-    """POST a GraphQL query and return the parsed JSON response."""
+def graphql(query, variables, attempts=None):
+    """POST a GraphQL query, retrying transient failures with backoff.
+
+    GitHub's API is not always reliable: 502/503/504 from its edge and
+    read timeouts happen. Those are retried; auth and query errors are not.
+    """
     body = json.dumps({'query': query, 'variables': variables}).encode('utf-8')
-    request = urllib.request.Request(
-        GRAPHQL_URL,
-        data=body,
-        headers={'Authorization': 'token ' + ACCESS_TOKEN, 'Content-Type': 'application/json'},
-        method='POST',
-    )
-    try:
-        with urllib.request.urlopen(request) as response:
-            return json.loads(response.read().decode('utf-8'))
-    except urllib.error.HTTPError as error:
-        raise Exception(f'GraphQL request failed ({error.code}): {error.read().decode()[:400]}')
+    max_attempts = attempts or MAX_ATTEMPTS
+    last_error = 'no attempt made'
+    for attempt in range(1, max_attempts + 1):
+        request = urllib.request.Request(
+            GRAPHQL_URL,
+            data=body,
+            headers={'Authorization': 'token ' + ACCESS_TOKEN, 'Content-Type': 'application/json'},
+            method='POST',
+        )
+        delay = None
+        try:
+            with urllib.request.urlopen(request, timeout=REQUEST_TIMEOUT) as response:
+                return json.loads(response.read().decode('utf-8'))
+        except urllib.error.HTTPError as error:
+            detail = error.read().decode('utf-8', 'replace')[:400]
+            retryable = error.code in RETRYABLE_STATUS or (
+                error.code == 403 and 'rate limit' in detail.lower()
+            )
+            if not retryable:
+                raise Exception(f'GraphQL request failed ({error.code}): {detail}')
+            last_error = f'HTTP {error.code}: {detail[:120].strip()}'
+            delay = retry_delay(attempt, error.headers.get('Retry-After') if error.headers else None)
+        except TRANSIENT_ERRORS as error:
+            last_error = f'{type(error).__name__}: {error}'
+            delay = retry_delay(attempt)
+        if attempt < max_attempts:
+            print(f'::warning::GraphQL attempt {attempt}/{max_attempts} failed ({last_error}); retrying in {delay:.1f}s', flush=True)
+            time.sleep(delay)
+    raise Exception(f'GraphQL request failed after {max_attempts} attempts: {last_error}')
 
 
 def graphql_data(data, *path, default=None):

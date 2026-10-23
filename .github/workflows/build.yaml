@@ -6,29 +6,65 @@ on:
   schedule:
     - cron: "0 4 * * *"
   workflow_dispatch:
+
+# One generation at a time: a scheduled run racing a push-triggered run ends in
+# two commits (or a non-fast-forward push), not in fresher stats.
+concurrency:
+  group: readme-build-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-24.04
+    # Leaves room for the in-script retries plus two full reruns; the old
+    # 360-minute default let a hung request look like a dead workflow.
+    timeout-minutes: 40
     permissions:
       contents: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
       - name: Get Python 3.12
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: '3.12'
       - name: Update README files
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           USER_NAME: ${{ secrets.USER_NAME }}
-        run: python today.py
+        # The script already retries every GraphQL call; this second layer
+        # covers anything outside HTTP (a bad parse, a transient local error).
+        run: |
+          for attempt in 1 2 3; do
+            if python today.py; then
+              exit 0
+            fi
+            if [ "$attempt" -eq 3 ]; then
+              echo "::error::today.py failed on all 3 attempts"
+              exit 1
+            fi
+            echo "::warning::today.py failed on attempt ${attempt}/3, retrying in 60s"
+            sleep 60
+          done
       - name: Commit
-        run: |-
+        run: |
           git config --global user.email "github-actions-bot@PabloJustDevelops.github.io"
           git config --global user.name "PabloJustDevelops/GitHub-Actions-Bot"
           git add -A
-          git commit -m "Updated README" || echo "No changes to commit"
-          git push
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "Updated README"
+          for attempt in 1 2 3; do
+            if git push; then
+              exit 0
+            fi
+            echo "::warning::push failed on attempt ${attempt}/3, rebasing on origin/main"
+            git pull --rebase --autostash origin main || git rebase --abort || true
+            sleep $((attempt * 10))
+          done
+          echo "::error::could not push after 3 attempts"
+          exit 1

@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-31T10:13:36+00:00",
+ "generated_at": "2026-11-01T11:05:32+00:00",
  "repos": {
   "CommandCodeAI/command-code": {
    "additions": 0,
@@ -38,7 +38,7 @@
   },
   "PabloJustDevelops/PabloJustDevelops": {
    "additions": 7834,
-   "commits": 230,
+   "commits": 231,
    "deletions": 2004,
    "full_at": "2026-10-23T12:50:39+00:00",
    "mine": 115
@@ -72,11 +72,11 @@
    "mine": 3
   },
   "PabloJustDevelops/dotfiles": {
-   "additions": 271400,
-   "commits": 77,
-   "deletions": 4180,
+   "additions": 288221,
+   "commits": 85,
+   "deletions": 11601,
    "full_at": "2026-10-23T12:50:39+00:00",
-   "mine": 77
+   "mine": 85
   },
   "PabloJustDevelops/file-organizer-cli": {
    "additions": 275069,
@@ -241,7 +241,7 @@
   },
   "rlaope/oh-my-hermes": {
    "additions": 0,
-   "commits": 6335,
+   "commits": 6344,
    "deletions": 0,
    "full_at": "2026-10-23T12:50:39+00:00",
    "mine": 0

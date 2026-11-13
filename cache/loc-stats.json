@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-12T12:17:52+00:00",
+ "generated_at": "2026-11-13T11:56:49+00:00",
  "repos": {
   "CommandCodeAI/command-code": {
    "additions": 0,
@@ -38,7 +38,7 @@
   },
   "PabloJustDevelops/PabloJustDevelops": {
    "additions": 7834,
-   "commits": 242,
+   "commits": 243,
    "deletions": 2004,
    "full_at": "2026-10-23T12:50:39+00:00",
    "mine": 115
@@ -64,6 +64,13 @@
    "full_at": "2026-10-29T10:44:56+00:00",
    "mine": 0
   },
+  "PabloJustDevelops/atalaya": {
+   "additions": 2786,
+   "commits": 6,
+   "deletions": 109,
+   "full_at": "2026-11-13T11:56:38+00:00",
+   "mine": 6
+  },
   "PabloJustDevelops/commandcode-forge": {
    "additions": 5264,
    "commits": 3,
@@ -72,11 +79,11 @@
    "mine": 3
   },
   "PabloJustDevelops/dotfiles": {
-   "additions": 309341,
-   "commits": 168,
-   "deletions": 14912,
+   "additions": 310854,
+   "commits": 177,
+   "deletions": 15225,
    "full_at": "2026-10-23T12:50:39+00:00",
-   "mine": 168
+   "mine": 177
   },
   "PabloJustDevelops/file-organizer-cli": {
    "additions": 275069,
@@ -234,14 +241,14 @@
   },
   "openai/codex": {
    "additions": 0,
-   "commits": 13456,
+   "commits": 13518,
    "deletions": 0,
    "full_at": "2026-10-23T12:50:39+00:00",
    "mine": 0
   },
   "rlaope/oh-my-hermes": {
    "additions": 0,
-   "commits": 8178,
+   "commits": 8425,
    "deletions": 0,
    "full_at": "2026-10-23T12:50:39+00:00",
    "mine": 0

@@ -1,60 +1,60 @@
 {
- "generated_at": "2026-11-22T12:20:14+00:00",
+ "generated_at": "2026-11-23T14:08:36+00:00",
  "repos": {
   "CommandCodeAI/command-code": {
    "additions": 0,
    "commits": 53,
    "deletions": 0,
-   "full_at": "2026-10-23T12:50:39+00:00",
+   "full_at": "2026-11-23T14:08:22+00:00",
    "mine": 0
   },
   "CommandCodeAI/desktop": {
    "additions": 0,
    "commits": 19,
    "deletions": 0,
-   "full_at": "2026-10-23T12:50:39+00:00",
+   "full_at": "2026-11-23T14:08:22+00:00",
    "mine": 0
   },
   "PabloJustDevelops/Automata-Core-App": {
    "additions": 8471,
    "commits": 3,
    "deletions": 0,
-   "full_at": "2026-10-23T12:50:39+00:00",
+   "full_at": "2026-11-23T14:08:21+00:00",
    "mine": 3
   },
   "PabloJustDevelops/Brandio-Car-Detection": {
    "additions": 6690,
    "commits": 6,
    "deletions": 2034,
-   "full_at": "2026-10-23T12:50:39+00:00",
+   "full_at": "2026-11-23T14:08:22+00:00",
    "mine": 6
   },
   "PabloJustDevelops/Migracion-SP3-SP4": {
    "additions": 1192509,
    "commits": 15,
    "deletions": 554876,
-   "full_at": "2026-10-23T12:50:39+00:00",
+   "full_at": "2026-11-23T14:08:23+00:00",
    "mine": 15
   },
   "PabloJustDevelops/PabloJustDevelops": {
    "additions": 7834,
-   "commits": 252,
+   "commits": 253,
    "deletions": 2004,
-   "full_at": "2026-10-23T12:50:39+00:00",
+   "full_at": "2026-11-23T14:08:28+00:00",
    "mine": 115
   },
   "PabloJustDevelops/Song-Recommender-Future-Proyect": {
    "additions": 2,
    "commits": 2,
    "deletions": 1,
-   "full_at": "2026-10-23T12:50:39+00:00",
+   "full_at": "2026-11-23T14:08:21+00:00",
    "mine": 2
   },
   "PabloJustDevelops/TravelPal": {
    "additions": 323183,
    "commits": 524,
    "deletions": 166191,
-   "full_at": "2026-10-23T12:50:39+00:00",
+   "full_at": "2026-11-23T14:08:36+00:00",
    "mine": 523
   },
   "PabloJustDevelops/agent-office": {
@@ -79,11 +79,11 @@
    "mine": 3
   },
   "PabloJustDevelops/dotfiles": {
-   "additions": 348680,
-   "commits": 222,
-   "deletions": 19341,
+   "additions": 349765,
+   "commits": 234,
+   "deletions": 19884,
    "full_at": "2026-10-23T12:50:39+00:00",
-   "mine": 222
+   "mine": 234
   },
   "PabloJustDevelops/file-organizer-cli": {
    "additions": 275069,
@@ -241,14 +241,14 @@
   },
   "openai/codex": {
    "additions": 0,
-   "commits": 14018,
+   "commits": 14059,
    "deletions": 0,
    "full_at": "2026-10-23T12:50:39+00:00",
    "mine": 0
   },
   "rlaope/oh-my-hermes": {
    "additions": 0,
-   "commits": 9594,
+   "commits": 9706,
    "deletions": 0,
    "full_at": "2026-10-23T12:50:39+00:00",
    "mine": 0

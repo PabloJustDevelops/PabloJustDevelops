@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-24T14:38:00+00:00",
+ "generated_at": "2026-11-25T13:58:30+00:00",
  "repos": {
   "CommandCodeAI/command-code": {
    "additions": 0,
@@ -38,7 +38,7 @@
   },
   "PabloJustDevelops/PabloJustDevelops": {
    "additions": 7834,
-   "commits": 254,
+   "commits": 255,
    "deletions": 2004,
    "full_at": "2026-11-23T14:08:28+00:00",
    "mine": 115
@@ -79,11 +79,11 @@
    "mine": 3
   },
   "PabloJustDevelops/dotfiles": {
-   "additions": 354057,
-   "commits": 248,
-   "deletions": 21534,
+   "additions": 356721,
+   "commits": 262,
+   "deletions": 22474,
    "full_at": "2026-11-24T14:38:00+00:00",
-   "mine": 248
+   "mine": 262
   },
   "PabloJustDevelops/file-organizer-cli": {
    "additions": 275069,
@@ -131,49 +131,56 @@
    "additions": 31004,
    "commits": 12,
    "deletions": 162,
-   "full_at": "2026-10-23T12:50:39+00:00",
+   "full_at": "2026-11-25T13:58:22+00:00",
    "mine": 12
+  },
+  "PabloJustDevelops/nexis": {
+   "additions": 25626,
+   "commits": 73,
+   "deletions": 747,
+   "full_at": "2026-11-25T13:58:23+00:00",
+   "mine": 68
   },
   "PabloJustDevelops/nx-workspace-testing": {
    "additions": 45209,
    "commits": 5,
    "deletions": 36,
-   "full_at": "2026-10-23T12:50:39+00:00",
+   "full_at": "2026-11-25T13:58:21+00:00",
    "mine": 5
   },
   "PabloJustDevelops/pablo-portfolio": {
    "additions": 16186,
    "commits": 40,
    "deletions": 2518,
-   "full_at": "2026-10-23T12:50:39+00:00",
+   "full_at": "2026-11-25T13:58:23+00:00",
    "mine": 38
   },
   "PabloJustDevelops/packetly": {
    "additions": 95149,
    "commits": 37,
    "deletions": 24313,
-   "full_at": "2026-10-23T12:50:39+00:00",
+   "full_at": "2026-11-25T13:58:23+00:00",
    "mine": 37
   },
   "PabloJustDevelops/practica-pytest-github": {
    "additions": 89,
    "commits": 5,
    "deletions": 3,
-   "full_at": "2026-10-23T12:50:39+00:00",
+   "full_at": "2026-11-25T13:58:21+00:00",
    "mine": 5
   },
   "PabloJustDevelops/reformashgalbacete": {
    "additions": 37660,
    "commits": 24,
    "deletions": 1324,
-   "full_at": "2026-10-23T12:50:39+00:00",
+   "full_at": "2026-11-25T13:58:23+00:00",
    "mine": 24
   },
   "PabloJustDevelops/retrovisor-band": {
    "additions": 35245,
    "commits": 1,
    "deletions": 0,
-   "full_at": "2026-10-23T12:50:39+00:00",
+   "full_at": "2026-11-25T13:58:22+00:00",
    "mine": 1
   },
   "PabloJustDevelops/self-hosted-monorepo": {
@@ -241,14 +248,14 @@
   },
   "openai/codex": {
    "additions": 0,
-   "commits": 14162,
+   "commits": 14242,
    "deletions": 0,
    "full_at": "2026-10-23T12:50:39+00:00",
    "mine": 0
   },
   "rlaope/oh-my-hermes": {
    "additions": 0,
-   "commits": 9985,
+   "commits": 10110,
    "deletions": 0,
    "full_at": "2026-10-23T12:50:39+00:00",
    "mine": 0
